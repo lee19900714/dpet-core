@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.PetInfoMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.PetInfo">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<id column="user_id" jdbcType="CHAR" property="userId" />
+		<id column="pet_type" jdbcType="CHAR" property="petType" />
+		<result column="pet_name" jdbcType="VARCHAR" property="petName" />
+		<result column="pet_sex" jdbcType="INTEGER" property="petSex" />
+		<result column="pet_brithday" jdbcType="TIMESTAMP" property="petBrithday" />
+		<result column="home_day" jdbcType="TIMESTAMP" property="homeDay" />
+		<result column="pet_weight" jdbcType="DOUBLE" property="petWeight" />
+		<result column="pet_height" jdbcType="DOUBLE" property="petHeight" />
+		<result column="pet_length" jdbcType="DOUBLE" property="petLength" />
+		<result column="anthelmintic_condition" jdbcType="INTEGER"
+			property="anthelminticCondition" />
+		<result column="sterilization_condition" jdbcType="INTEGER"
+			property="sterilizationCondition" />
+		<result column="vaccine_condition" jdbcType="INTEGER" property="vaccineCondition" />
+		<result column="pet_image_id" jdbcType="CHAR" property="petImageId" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, pet_type, pet_name, pet_sex, pet_brithday,
+		home_day,
+		pet_weight, pet_height,
+		pet_length, anthelmintic_condition,
+		sterilization_condition, vaccine_condition,
+		pet_image_id,
+		modify_time,
+		create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pet_info
+		where 1=1
+		and id = #{id,jdbcType=CHAR}
+		and user_id =
+		#{userId,jdbcType=CHAR}
+		and pet_type = #{petType,jdbcType=CHAR}
+	</select>
+	
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pet_info
+		where 1=1
+		and user_id =
+		#{userId,jdbcType=CHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from
+		pet_info
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId,jdbcType=CHAR}
+		</if>
+		<if test="petType != null">
+			and pet_type = #{petType,jdbcType=CHAR}
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.PetInfo">
+		insert into pet_info (id,
+		user_id, pet_type, pet_name,
+		pet_sex, pet_brithday, home_day,
+		pet_weight, pet_height, pet_length,
+		anthelmintic_condition,
+		sterilization_condition,
+		vaccine_condition, pet_image_id, modify_time,
+		create_time)
+		values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR},
+		#{petType,jdbcType=CHAR}, #{petName,jdbcType=VARCHAR},
+		#{petSex,jdbcType=INTEGER}, #{petBrithday,jdbcType=TIMESTAMP},
+		#{homeDay,jdbcType=TIMESTAMP},
+		#{petWeight,jdbcType=DOUBLE},
+		#{petHeight,jdbcType=DOUBLE}, #{petLength,jdbcType=DOUBLE},
+		#{anthelminticCondition,jdbcType=INTEGER},
+		#{sterilizationCondition,jdbcType=INTEGER},
+		#{vaccineCondition,jdbcType=INTEGER}, #{petImageId,jdbcType=CHAR},
+		#{modifyTime,jdbcType=TIMESTAMP},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.PetInfo">
+		insert into pet_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="petType != null">
+				pet_type,
+			</if>
+			<if test="petName != null">
+				pet_name,
+			</if>
+			<if test="petSex != null">
+				pet_sex,
+			</if>
+			<if test="petBrithday != null">
+				pet_brithday,
+			</if>
+			<if test="homeDay != null">
+				home_day,
+			</if>
+			<if test="petWeight != null">
+				pet_weight,
+			</if>
+			<if test="petHeight != null">
+				pet_height,
+			</if>
+			<if test="petLength != null">
+				pet_length,
+			</if>
+			<if test="anthelminticCondition != null">
+				anthelmintic_condition,
+			</if>
+			<if test="sterilizationCondition != null">
+				sterilization_condition,
+			</if>
+			<if test="vaccineCondition != null">
+				vaccine_condition,
+			</if>
+			<if test="petImageId != null">
+				pet_image_id,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=CHAR},
+			</if>
+			<if test="petType != null">
+				#{petType,jdbcType=CHAR},
+			</if>
+			<if test="petName != null">
+				#{petName,jdbcType=VARCHAR},
+			</if>
+			<if test="petSex != null">
+				#{petSex,jdbcType=INTEGER},
+			</if>
+			<if test="petBrithday != null">
+				#{petBrithday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="homeDay != null">
+				#{homeDay,jdbcType=TIMESTAMP},
+			</if>
+			<if test="petWeight != null">
+				#{petWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="petHeight != null">
+				#{petHeight,jdbcType=DOUBLE},
+			</if>
+			<if test="petLength != null">
+				#{petLength,jdbcType=DOUBLE},
+			</if>
+			<if test="anthelminticCondition != null">
+				#{anthelminticCondition,jdbcType=INTEGER},
+			</if>
+			<if test="sterilizationCondition != null">
+				#{sterilizationCondition,jdbcType=INTEGER},
+			</if>
+			<if test="vaccineCondition != null">
+				#{vaccineCondition,jdbcType=INTEGER},
+			</if>
+			<if test="petImageId != null">
+				#{petImageId,jdbcType=CHAR},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.PetInfo">
+		update pet_info
+		<set>
+			<if test="petName != null">
+				pet_name = #{petName,jdbcType=VARCHAR},
+			</if>
+			<if test="petSex != null">
+				pet_sex = #{petSex,jdbcType=INTEGER},
+			</if>
+			<if test="petBrithday != null">
+				pet_brithday = #{petBrithday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="homeDay != null">
+				home_day = #{homeDay,jdbcType=TIMESTAMP},
+			</if>
+			<if test="petWeight != null">
+				pet_weight = #{petWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="petHeight != null">
+				pet_height = #{petHeight,jdbcType=DOUBLE},
+			</if>
+			<if test="petLength != null">
+				pet_length = #{petLength,jdbcType=DOUBLE},
+			</if>
+			<if test="anthelminticCondition != null">
+				anthelmintic_condition =
+				#{anthelminticCondition,jdbcType=INTEGER},
+			</if>
+			<if test="sterilizationCondition != null">
+				sterilization_condition =
+				#{sterilizationCondition,jdbcType=INTEGER},
+			</if>
+			<if test="vaccineCondition != null">
+				vaccine_condition = #{vaccineCondition,jdbcType=INTEGER},
+			</if>
+			<if test="petImageId != null">
+				pet_image_id = #{petImageId,jdbcType=CHAR},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+		and user_id = #{userId,jdbcType=CHAR}
+		and pet_type = #{petType,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.PetInfo">
+		update pet_info
+		set pet_name = #{petName,jdbcType=VARCHAR},
+		pet_sex =
+		#{petSex,jdbcType=INTEGER},
+		pet_brithday =
+		#{petBrithday,jdbcType=TIMESTAMP},
+		home_day =
+		#{homeDay,jdbcType=TIMESTAMP},
+		pet_weight =
+		#{petWeight,jdbcType=DOUBLE},
+		pet_height =
+		#{petHeight,jdbcType=DOUBLE},
+		pet_length =
+		#{petLength,jdbcType=DOUBLE},
+		anthelmintic_condition =
+		#{anthelminticCondition,jdbcType=INTEGER},
+		sterilization_condition =
+		#{sterilizationCondition,jdbcType=INTEGER},
+		vaccine_condition =
+		#{vaccineCondition,jdbcType=INTEGER},
+		pet_image_id =
+		#{petImageId,jdbcType=CHAR},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=CHAR}
+		and
+		user_id = #{userId,jdbcType=CHAR}
+		and pet_type =
+		#{petType,jdbcType=CHAR}
+	</update>
+</mapper>

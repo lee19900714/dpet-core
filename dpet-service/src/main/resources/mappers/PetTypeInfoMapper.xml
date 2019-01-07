@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.PetTypeInfoMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.PetTypeInfo">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<result column="pet_type_name" jdbcType="VARCHAR" property="petTypeName" />
+		<result column="pet_type_no" jdbcType="INTEGER" property="petTypeNo" />
+		<result column="pet_icon" jdbcType="VARCHAR" property="petIcon" />
+		<result column="is_enable" jdbcType="VARCHAR" property="isEnable" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pet_type_name, pet_type_no, pet_icon, is_enable,
+		create_time,
+		modify_time, create_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pet_type_info
+		where 1=1
+		and id = #{id,jdbcType=CHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pet_type_info
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from
+		pet_type_info
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.PetTypeInfo">
+		insert into pet_type_info (id,
+		pet_type_name, pet_type_no,
+		pet_icon, is_enable, create_time,
+		modify_time, create_id)
+		values (#{id,jdbcType=CHAR},
+		#{petTypeName,jdbcType=VARCHAR},
+		#{petTypeNo,jdbcType=INTEGER},
+		#{petIcon,jdbcType=VARCHAR}, #{isEnable,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.PetTypeInfo">
+		insert into pet_type_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="petTypeName != null">
+				pet_type_name,
+			</if>
+			<if test="petTypeNo != null">
+				pet_type_no,
+			</if>
+			<if test="petIcon != null">
+				pet_icon,
+			</if>
+			<if test="isEnable != null">
+				is_enable,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="petTypeName != null">
+				#{petTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="petTypeNo != null">
+				#{petTypeNo,jdbcType=INTEGER},
+			</if>
+			<if test="petIcon != null">
+				#{petIcon,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.PetTypeInfo">
+		update pet_type_info
+		<set>
+			<if test="petTypeName != null">
+				pet_type_name = #{petTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="petTypeNo != null">
+				pet_type_no = #{petTypeNo,jdbcType=INTEGER},
+			</if>
+			<if test="petIcon != null">
+				pet_icon = #{petIcon,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				is_enable = #{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.PetTypeInfo">
+		update
+		pet_type_info
+		set pet_type_name = #{petTypeName,jdbcType=VARCHAR},
+		pet_type_no = #{petTypeNo,jdbcType=INTEGER},
+		pet_icon =
+		#{petIcon,jdbcType=VARCHAR},
+		is_enable = #{isEnable,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+	</update>
+</mapper>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.CourseChaptersMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.CourseChapters">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<id column="course_id" jdbcType="CHAR" property="courseId" />
+		<result column="course_chapters" jdbcType="VARCHAR" property="courseChapters" />
+		<result column="chapter_order" jdbcType="INTEGER" property="chapterOrder" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, course_id, course_chapters, chapter_order, create_time,
+		modify_time,
+		create_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_chapters
+		where 1=1
+		and id = #{id,jdbcType=CHAR}
+		<if test="courseId != null">
+			and course_id = #{courseId,jdbcType=CHAR}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from
+		course_chapters
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="courseId != null">
+			and course_id = #{courseId,jdbcType=CHAR}
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.CourseChapters">
+		insert into course_chapters
+		(id, course_id, course_chapters,
+		chapter_order, create_time,
+		modify_time,
+		create_id)
+		values (#{id,jdbcType=CHAR},
+		#{courseId,jdbcType=CHAR},
+		#{courseChapters,jdbcType=VARCHAR},
+		#{chapterOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.CourseChapters">
+		insert into course_chapters
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="courseId != null">
+				course_id,
+			</if>
+			<if test="courseChapters != null">
+				course_chapters,
+			</if>
+			<if test="chapterOrder != null">
+				chapter_order,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=CHAR},
+			</if>
+			<if test="courseChapters != null">
+				#{courseChapters,jdbcType=VARCHAR},
+			</if>
+			<if test="chapterOrder != null">
+				#{chapterOrder,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.CourseChapters">
+		update course_chapters
+		<set>
+			<if test="courseChapters != null">
+				course_chapters = #{courseChapters,jdbcType=VARCHAR},
+			</if>
+			<if test="chapterOrder != null">
+				chapter_order = #{chapterOrder,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+		and course_id =
+		#{courseId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.CourseChapters">
+		update
+		course_chapters
+		set course_chapters =
+		#{courseChapters,jdbcType=VARCHAR},
+		chapter_order =
+		#{chapterOrder,jdbcType=INTEGER},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+		and course_id =
+		#{courseId,jdbcType=CHAR}
+	</update>
+	
+	<select id="selectByCourseId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_chapters
+		where 1=1
+		and course_id = #{courseId,jdbcType=CHAR}
+	</select>
+</mapper>

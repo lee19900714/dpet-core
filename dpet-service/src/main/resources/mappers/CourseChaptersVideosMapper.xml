@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.CourseChaptersVideosMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.CourseChaptersVideos">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<id column="course_chapters_id" jdbcType="CHAR" property="courseChaptersId" />
+		<result column="video_name" jdbcType="VARCHAR" property="videoName" />
+		<result column="video_length_time" jdbcType="INTEGER" property="videoLengthTime" />
+		<result column="video_image_url" jdbcType="VARCHAR" property="videoImageUrl" />
+		<result column="video_order" jdbcType="INTEGER" property="videoOrder" />
+		<result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+		<result column="points" jdbcType="VARCHAR" property="points" />
+		<result column="point_pic_url" jdbcType="VARCHAR" property="pointPicUrl" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, course_chapters_id, video_name, video_length_time,
+		video_image_url,
+		video_order,
+		video_url, points, point_pic_url,
+		create_time, modify_time, create_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_chapters_videos
+		where 1=1
+		and id = #{id,jdbcType=CHAR}
+		<if test="courseChaptersId != null">
+			and course_chapters_id = #{courseChaptersId,jdbcType=CHAR}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from
+		course_chapters_videos
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="courseChaptersId != null">
+			and course_chapters_id = #{courseChaptersId,jdbcType=CHAR}
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.CourseChaptersVideos">
+		insert into
+		course_chapters_videos (id, course_chapters_id, video_name,
+		video_length_time, video_image_url, video_order,
+		video_url, points,
+		point_pic_url,
+		create_time, modify_time, create_id
+		)
+		values
+		(#{id,jdbcType=CHAR}, #{courseChaptersId,jdbcType=CHAR},
+		#{videoName,jdbcType=VARCHAR},
+		#{videoLengthTime,jdbcType=INTEGER},
+		#{videoImageUrl,jdbcType=VARCHAR}, #{videoOrder,jdbcType=INTEGER},
+		#{videoUrl,jdbcType=VARCHAR}, #{points,jdbcType=VARCHAR},
+		#{pointPicUrl,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=CHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.CourseChaptersVideos">
+		insert into course_chapters_videos
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="courseChaptersId != null">
+				course_chapters_id,
+			</if>
+			<if test="videoName != null">
+				video_name,
+			</if>
+			<if test="videoLengthTime != null">
+				video_length_time,
+			</if>
+			<if test="videoImageUrl != null">
+				video_image_url,
+			</if>
+			<if test="videoOrder != null">
+				video_order,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="points != null">
+				points,
+			</if>
+			<if test="pointPicUrl != null">
+				point_pic_url,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="courseChaptersId != null">
+				#{courseChaptersId,jdbcType=CHAR},
+			</if>
+			<if test="videoName != null">
+				#{videoName,jdbcType=VARCHAR},
+			</if>
+			<if test="videoLengthTime != null">
+				#{videoLengthTime,jdbcType=INTEGER},
+			</if>
+			<if test="videoImageUrl != null">
+				#{videoImageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoOrder != null">
+				#{videoOrder,jdbcType=INTEGER},
+			</if>
+			<if test="videoUrl != null">
+				#{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="points != null">
+				#{points,jdbcType=VARCHAR},
+			</if>
+			<if test="pointPicUrl != null">
+				#{pointPicUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.CourseChaptersVideos">
+		update course_chapters_videos
+		<set>
+			<if test="videoName != null">
+				video_name = #{videoName,jdbcType=VARCHAR},
+			</if>
+			<if test="videoLengthTime != null">
+				video_length_time = #{videoLengthTime,jdbcType=INTEGER},
+			</if>
+			<if test="videoImageUrl != null">
+				video_image_url = #{videoImageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="videoOrder != null">
+				video_order = #{videoOrder,jdbcType=INTEGER},
+			</if>
+			<if test="videoUrl != null">
+				video_url = #{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="points != null">
+				points = #{points,jdbcType=VARCHAR},
+			</if>
+			<if test="pointPicUrl != null">
+				point_pic_url = #{pointPicUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+		and course_chapters_id =
+		#{courseChaptersId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.CourseChaptersVideos">
+		update
+		course_chapters_videos
+		set video_name = #{videoName,jdbcType=VARCHAR},
+		video_length_time = #{videoLengthTime,jdbcType=INTEGER},
+		video_image_url = #{videoImageUrl,jdbcType=VARCHAR},
+		video_order =
+		#{videoOrder,jdbcType=INTEGER},
+		video_url =
+		#{videoUrl,jdbcType=VARCHAR},
+		points = #{points,jdbcType=VARCHAR},
+		point_pic_url = #{pointPicUrl,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+		and course_chapters_id =
+		#{courseChaptersId,jdbcType=CHAR}
+	</update>
+	
+	<select id="selectByCourseChaptersId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_chapters_videos
+		where 1=1
+		and course_chapters_id = #{courseChaptersId,jdbcType=CHAR}
+	</select>
+</mapper>

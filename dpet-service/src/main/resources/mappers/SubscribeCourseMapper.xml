@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.SubscribeCourseMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.SubscribeCourse">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<id column="course_id" jdbcType="CHAR" property="courseId" />
+		<id column="user_id" jdbcType="CHAR" property="userId" />
+		<result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, course_id, user_id, subscribe_time, create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from subscribe_course
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="courseId != null">
+			and course_id = #{courseId,jdbcType=CHAR}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId,jdbcType=CHAR}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from subscribe_course
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="courseId != null">
+			and course_id = #{courseId,jdbcType=CHAR}
+		</if>
+		<if test="userId != null">
+			and user_id = #{userId,jdbcType=CHAR}
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.SubscribeCourse">
+		insert into subscribe_course (id, course_id, user_id,
+		subscribe_time, create_time)
+		values (#{id,jdbcType=CHAR}, #{courseId,jdbcType=CHAR},
+		#{userId,jdbcType=CHAR},
+		#{subscribeTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.SubscribeCourse">
+		insert into subscribe_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="courseId != null">
+				course_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="subscribeTime != null">
+				subscribe_time,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="courseId != null">
+				#{courseId,jdbcType=CHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=CHAR},
+			</if>
+			<if test="subscribeTime != null">
+				#{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.SubscribeCourse">
+		update subscribe_course
+		<set>
+			<if test="subscribeTime != null">
+				subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+		and course_id = #{courseId,jdbcType=CHAR}
+		and user_id = #{userId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.SubscribeCourse">
+		update subscribe_course
+		set subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=CHAR}
+		and course_id = #{courseId,jdbcType=CHAR}
+		and user_id = #{userId,jdbcType=CHAR}
+	</update>
+	
+	<select id="selectByUserIdAndPage" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from subscribe_course
+		where 1=1
+		and user_id = #{userId,jdbcType=CHAR}
+	</select>
+</mapper>

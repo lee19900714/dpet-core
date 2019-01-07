@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.ArticleInfoMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.ArticleInfo">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<result column="article_name" jdbcType="VARCHAR" property="articleName" />
+		<result column="article_pic_url" jdbcType="VARCHAR" property="articlePicUrl" />
+		<result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+		<result column="read_count" jdbcType="INTEGER" property="readCount" />
+		<result column="coll_count" jdbcType="INTEGER" property="collCount" />
+		<result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+		<result column="article_order" jdbcType="INTEGER" property="articleOrder" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, article_name, article_pic_url, article_content,
+		read_count,
+		coll_count, article_title,
+		article_order, create_time,
+		modify_time, create_id
+	</sql>
+	<select id="selectByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from article_info
+	</select>
+	<select id="selectByUserIdAndPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from article_info where create_id = #{userId,jdbcType=CHAR}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from article_info
+		where id = #{id,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from
+		article_info
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.ArticleInfo">
+		insert into article_info (id,
+		article_name, article_pic_url,
+		article_content, read_count, coll_count,
+		article_title, article_order, create_time,
+		modify_time, create_id)
+		values (#{id,jdbcType=CHAR}, #{articleName,jdbcType=VARCHAR},
+		#{articlePicUrl,jdbcType=VARCHAR},
+		#{articleContent,jdbcType=VARCHAR},
+		#{readCount,jdbcType=INTEGER}, #{collCount,jdbcType=INTEGER},
+		#{articleTitle,jdbcType=VARCHAR}, #{articleOrder,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{modifyTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.ArticleInfo">
+		insert into article_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="articleName != null">
+				article_name,
+			</if>
+			<if test="articlePicUrl != null">
+				article_pic_url,
+			</if>
+			<if test="articleContent != null">
+				article_content,
+			</if>
+			<if test="readCount != null">
+				read_count,
+			</if>
+			<if test="collCount != null">
+				coll_count,
+			</if>
+			<if test="articleTitle != null">
+				article_title,
+			</if>
+			<if test="articleOrder != null">
+				article_order,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="articleName != null">
+				#{articleName,jdbcType=VARCHAR},
+			</if>
+			<if test="articlePicUrl != null">
+				#{articlePicUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="articleContent != null">
+				#{articleContent,jdbcType=VARCHAR},
+			</if>
+			<if test="readCount != null">
+				#{readCount,jdbcType=INTEGER},
+			</if>
+			<if test="collCount != null">
+				#{collCount,jdbcType=INTEGER},
+			</if>
+			<if test="articleTitle != null">
+				#{articleTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="articleOrder != null">
+				#{articleOrder,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.ArticleInfo">
+		update article_info
+		<set>
+			<if test="articleName != null">
+				article_name = #{articleName,jdbcType=VARCHAR},
+			</if>
+			<if test="articlePicUrl != null">
+				article_pic_url = #{articlePicUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="articleContent != null">
+				article_content = #{articleContent,jdbcType=VARCHAR},
+			</if>
+			<if test="readCount != null">
+				read_count = #{readCount,jdbcType=INTEGER},
+			</if>
+			<if test="collCount != null">
+				coll_count = #{collCount,jdbcType=INTEGER},
+			</if>
+			<if test="articleTitle != null">
+				article_title = #{articleTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="articleOrder != null">
+				article_order = #{articleOrder,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.ArticleInfo">
+		update
+		article_info
+		set article_name = #{articleName,jdbcType=VARCHAR},
+		article_pic_url = #{articlePicUrl,jdbcType=VARCHAR},
+		article_content =
+		#{articleContent,jdbcType=VARCHAR},
+		read_count =
+		#{readCount,jdbcType=INTEGER},
+		coll_count =
+		#{collCount,jdbcType=INTEGER},
+		article_title =
+		#{articleTitle,jdbcType=VARCHAR},
+		article_order =
+		#{articleOrder,jdbcType=INTEGER},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		modify_time =
+		#{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+	</update>
+</mapper>

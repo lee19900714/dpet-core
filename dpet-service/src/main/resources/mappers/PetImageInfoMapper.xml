@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.PetImageInfoMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.PetImageInfo">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<id column="pet_id" jdbcType="CHAR" property="petId" />
+		<result column="pet_image_url" jdbcType="VARCHAR" property="petImageUrl" />
+		<result column="checker" jdbcType="VARCHAR" property="checker" />
+		<result column="checked_opinion" jdbcType="VARCHAR" property="checkedOpinion" />
+		<result column="checked_time" jdbcType="TIMESTAMP" property="checkedTime" />
+		<result column="is_checked" jdbcType="INTEGER" property="isChecked" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pet_id, pet_image_url, checker, checked_opinion, checked_time,
+		is_checked, create_time,
+		modify_time, create_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pet_image_info
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="petId != null">
+			and pet_id = #{petId,jdbcType=CHAR}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from pet_image_info
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=CHAR}
+		</if>
+		<if test="petId != null">
+			and pet_id = #{petId,jdbcType=CHAR}
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.PetImageInfo">
+		insert into pet_image_info (id, pet_id, pet_image_url,
+		checker, checked_opinion, checked_time,
+		is_checked, create_time, modify_time,
+		create_id)
+		values (#{id,jdbcType=CHAR}, #{petId,jdbcType=CHAR},
+		#{petImageUrl,jdbcType=VARCHAR},
+		#{checker,jdbcType=VARCHAR}, #{checkedOpinion,jdbcType=VARCHAR},
+		#{checkedTime,jdbcType=TIMESTAMP},
+		#{isChecked,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.PetImageInfo">
+		insert into pet_image_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="petId != null">
+				pet_id,
+			</if>
+			<if test="petImageUrl != null">
+				pet_image_url,
+			</if>
+			<if test="checker != null">
+				checker,
+			</if>
+			<if test="checkedOpinion != null">
+				checked_opinion,
+			</if>
+			<if test="checkedTime != null">
+				checked_time,
+			</if>
+			<if test="isChecked != null">
+				is_checked,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="petId != null">
+				#{petId,jdbcType=CHAR},
+			</if>
+			<if test="petImageUrl != null">
+				#{petImageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="checker != null">
+				#{checker,jdbcType=VARCHAR},
+			</if>
+			<if test="checkedOpinion != null">
+				#{checkedOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="checkedTime != null">
+				#{checkedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isChecked != null">
+				#{isChecked,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.PetImageInfo">
+		update pet_image_info
+		<set>
+			<if test="petImageUrl != null">
+				pet_image_url = #{petImageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="checker != null">
+				checker = #{checker,jdbcType=VARCHAR},
+			</if>
+			<if test="checkedOpinion != null">
+				checked_opinion = #{checkedOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="checkedTime != null">
+				checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isChecked != null">
+				is_checked = #{isChecked,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+		and pet_id = #{petId,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.PetImageInfo">
+		update pet_image_info
+		set pet_image_url = #{petImageUrl,jdbcType=VARCHAR},
+		checker = #{checker,jdbcType=VARCHAR},
+		checked_opinion = #{checkedOpinion,jdbcType=VARCHAR},
+		checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+		is_checked = #{isChecked,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+		and pet_id = #{petId,jdbcType=CHAR}
+	</update>
+</mapper>

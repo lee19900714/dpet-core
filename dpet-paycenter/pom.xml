@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.dpet</groupId>
+    <artifactId>dpet-parent</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>dpet-paycenter</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.dpet</groupId>
+  		<artifactId>dpet-framework</artifactId>
+  		<version>1.0</version>
+  	</dependency>
+  	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>YeePay_HTMLcommon</artifactId>
+		<version>3.0</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/YeePay_HTMLcommon_V3.0.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>bcmail-jdk14-141</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/bcmail-jdk14-141.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>bcprov-jdk16-1.0.20140106</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/bcprov-jdk16-1.0.20140106.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>CFCACertKitJS</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/CFCACertKitJS.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.yeepay</groupId>
+		<artifactId>PKIBASE</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/src/main/resources/lib/PKIBASE.jar</systemPath>
+	</dependency>
+	
+	
+  </dependencies>
+</project>

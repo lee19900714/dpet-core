@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.CourseInfoMapper">
+	<resultMap id="BaseResultMap" type="com.dpet.model.CourseInfo">
+		<id column="id" jdbcType="CHAR" property="id" />
+		<result column="course_name" jdbcType="VARCHAR" property="courseName" />
+		<result column="course_title" jdbcType="VARCHAR" property="courseTitle" />
+		<result column="course_type" jdbcType="INTEGER" property="courseType" />
+		<result column="course_length_time" jdbcType="INTEGER"
+			property="courseLengthTime" />
+		<result column="course_desc" jdbcType="VARCHAR" property="courseDesc" />
+		<result column="course_label" jdbcType="VARCHAR" property="courseLabel" />
+		<result column="course_cost" jdbcType="DOUBLE" property="courseCost" />
+		<result column="course_image" jdbcType="VARCHAR" property="courseImage" />
+		<result column="sale_state" jdbcType="INTEGER" property="saleState" />
+		<result column="course_order" jdbcType="INTEGER" property="courseOrder" />
+		<result column="trainer_info" jdbcType="VARCHAR" property="trainerInfo" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="learning_step" jdbcType="VARCHAR" property="learningStep" />
+		<result column="learning_times" jdbcType="INTEGER" property="learningTimes" />
+		<result column="joiner_count" jdbcType="INTEGER" property="joinerCount" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+		<result column="create_id" jdbcType="CHAR" property="createId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, course_name, course_title, course_type, course_length_time,
+		course_desc, course_label,
+		course_cost, course_image, sale_state, course_order, trainer_info, level,
+		learning_step,
+		learning_times, joiner_count, create_time, modify_time, create_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_info
+		where id = #{id,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+		delete from course_info
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.dpet.model.CourseInfo">
+		insert into course_info (id, course_name, course_title,
+		course_type, course_length_time, course_desc,
+		course_label, course_cost, course_image,
+		sale_state, course_order, trainer_info,
+		level, learning_step, learning_times,
+		joiner_count, create_time, modify_time,
+		create_id)
+		values (#{id,jdbcType=CHAR}, #{courseName,jdbcType=VARCHAR},
+		#{courseTitle,jdbcType=VARCHAR},
+		#{courseType,jdbcType=INTEGER}, #{courseLengthTime,jdbcType=INTEGER}, #{courseDesc,jdbcType=VARCHAR},
+		#{courseLabel,jdbcType=VARCHAR}, #{courseCost,jdbcType=DOUBLE},
+		#{courseImage,jdbcType=VARCHAR},
+		#{saleState,jdbcType=INTEGER}, #{courseOrder,jdbcType=INTEGER}, #{trainerInfo,jdbcType=VARCHAR},
+		#{level,jdbcType=INTEGER}, #{learningStep,jdbcType=VARCHAR},
+		#{learningTimes,jdbcType=INTEGER},
+		#{joinerCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP},
+		#{createId,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.dpet.model.CourseInfo">
+		insert into course_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="courseName != null">
+				course_name,
+			</if>
+			<if test="courseTitle != null">
+				course_title,
+			</if>
+			<if test="courseType != null">
+				course_type,
+			</if>
+			<if test="courseLengthTime != null">
+				course_length_time,
+			</if>
+			<if test="courseDesc != null">
+				course_desc,
+			</if>
+			<if test="courseLabel != null">
+				course_label,
+			</if>
+			<if test="courseCost != null">
+				course_cost,
+			</if>
+			<if test="courseImage != null">
+				course_image,
+			</if>
+			<if test="saleState != null">
+				sale_state,
+			</if>
+			<if test="courseOrder != null">
+				course_order,
+			</if>
+			<if test="trainerInfo != null">
+				trainer_info,
+			</if>
+			<if test="level != null">
+				level,
+			</if>
+			<if test="learningStep != null">
+				learning_step,
+			</if>
+			<if test="learningTimes != null">
+				learning_times,
+			</if>
+			<if test="joinerCount != null">
+				joiner_count,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="courseName != null">
+				#{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="courseTitle != null">
+				#{courseTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="courseType != null">
+				#{courseType,jdbcType=INTEGER},
+			</if>
+			<if test="courseLengthTime != null">
+				#{courseLengthTime,jdbcType=INTEGER},
+			</if>
+			<if test="courseDesc != null">
+				#{courseDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="courseLabel != null">
+				#{courseLabel,jdbcType=VARCHAR},
+			</if>
+			<if test="courseCost != null">
+				#{courseCost,jdbcType=DOUBLE},
+			</if>
+			<if test="courseImage != null">
+				#{courseImage,jdbcType=VARCHAR},
+			</if>
+			<if test="saleState != null">
+				#{saleState,jdbcType=INTEGER},
+			</if>
+			<if test="courseOrder != null">
+				#{courseOrder,jdbcType=INTEGER},
+			</if>
+			<if test="trainerInfo != null">
+				#{trainerInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+			<if test="learningStep != null">
+				#{learningStep,jdbcType=VARCHAR},
+			</if>
+			<if test="learningTimes != null">
+				#{learningTimes,jdbcType=INTEGER},
+			</if>
+			<if test="joinerCount != null">
+				#{joinerCount,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.CourseInfo">
+		update course_info
+		<set>
+			<if test="courseName != null">
+				course_name = #{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="courseTitle != null">
+				course_title = #{courseTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="courseType != null">
+				course_type = #{courseType,jdbcType=INTEGER},
+			</if>
+			<if test="courseLengthTime != null">
+				course_length_time = #{courseLengthTime,jdbcType=INTEGER},
+			</if>
+			<if test="courseDesc != null">
+				course_desc = #{courseDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="courseLabel != null">
+				course_label = #{courseLabel,jdbcType=VARCHAR},
+			</if>
+			<if test="courseCost != null">
+				course_cost = #{courseCost,jdbcType=DOUBLE},
+			</if>
+			<if test="courseImage != null">
+				course_image = #{courseImage,jdbcType=VARCHAR},
+			</if>
+			<if test="saleState != null">
+				sale_state = #{saleState,jdbcType=INTEGER},
+			</if>
+			<if test="courseOrder != null">
+				course_order = #{courseOrder,jdbcType=INTEGER},
+			</if>
+			<if test="trainerInfo != null">
+				trainer_info = #{trainerInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				level = #{level,jdbcType=INTEGER},
+			</if>
+			<if test="learningStep != null">
+				learning_step = #{learningStep,jdbcType=VARCHAR},
+			</if>
+			<if test="learningTimes != null">
+				learning_times = #{learningTimes,jdbcType=INTEGER},
+			</if>
+			<if test="joinerCount != null">
+				joiner_count = #{joinerCount,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.dpet.model.CourseInfo">
+		update course_info
+		set course_name = #{courseName,jdbcType=VARCHAR},
+		course_title = #{courseTitle,jdbcType=VARCHAR},
+		course_type = #{courseType,jdbcType=INTEGER},
+		course_length_time = #{courseLengthTime,jdbcType=INTEGER},
+		course_desc = #{courseDesc,jdbcType=VARCHAR},
+		course_label = #{courseLabel,jdbcType=VARCHAR},
+		course_cost = #{courseCost,jdbcType=DOUBLE},
+		course_image = #{courseImage,jdbcType=VARCHAR},
+		sale_state = #{saleState,jdbcType=INTEGER},
+		course_order = #{courseOrder,jdbcType=INTEGER},
+		trainer_info = #{trainerInfo,jdbcType=VARCHAR},
+		level = #{level,jdbcType=INTEGER},
+		learning_step = #{learningStep,jdbcType=VARCHAR},
+		learning_times = #{learningTimes,jdbcType=INTEGER},
+		joiner_count = #{joinerCount,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+		create_id = #{createId,jdbcType=CHAR}
+		where id = #{id,jdbcType=CHAR}
+	</update>
+
+	<select id="getCourseInfoByType" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course_info
+		where 1=1
+		<if test="courseType != null">
+			and course_type = #{courseType,jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

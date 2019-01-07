@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dpet.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dpet.model.UserInfo">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="user_image_url" jdbcType="VARCHAR" property="userImageUrl" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="phone_no" jdbcType="VARCHAR" property="phoneNo" />
+    <result column="last_active_time" jdbcType="TIMESTAMP" property="lastActiveTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_type, user_image_url, user_name, open_id, phone_no, last_active_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+    delete from user_info
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dpet.model.UserInfo">
+    insert into user_info (id, user_type, user_image_url, 
+      user_name, open_id, phone_no, 
+      last_active_time, create_time)
+    values (#{id,jdbcType=CHAR}, #{userType,jdbcType=INTEGER}, #{userImageUrl,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
+      #{lastActiveTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dpet.model.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userImageUrl != null">
+        user_image_url,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="phoneNo != null">
+        phone_no,
+      </if>
+      <if test="lastActiveTime != null">
+        last_active_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userImageUrl != null">
+        #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastActiveTime != null">
+        #{lastActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.UserInfo">
+    update user_info
+    <set>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userImageUrl != null">
+        user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastActiveTime != null">
+        last_active_time = #{lastActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dpet.model.UserInfo">
+    update user_info
+    set user_type = #{userType,jdbcType=INTEGER},
+      user_image_url = #{userImageUrl,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      last_active_time = #{lastActiveTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
