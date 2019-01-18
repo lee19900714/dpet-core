@@ -1,6 +1,5 @@
 package com.dpet.service.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.dpet.dao.CourseInfoMapper;
 import com.dpet.model.CourseInfo;
 import com.dpet.service.inter.CourseInfoService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 @Service
 public class CourseInfoServiceImpl implements CourseInfoService {
@@ -47,7 +48,8 @@ public class CourseInfoServiceImpl implements CourseInfoService {
 	}
 
 	@Override
-	public List<CourseInfo> getCourseInfoByType(Map<String, String> map) {
-		return courseInfoMapper.getCourseInfoByType(map);
+	public Page<CourseInfo> getCourseInfoByType(Map<String, String> map,int pageNum,int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		return (Page<CourseInfo>) courseInfoMapper.getCourseInfoByType(map);
 	}
 }

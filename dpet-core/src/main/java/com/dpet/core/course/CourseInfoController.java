@@ -37,7 +37,7 @@ import com.github.pagehelper.Page;
 @RestController
 @RequestMapping(value = "ipet/courseinfo")
 public class CourseInfoController extends MyBaseController {
-	
+
 	private static Log logger = LogFactory.getLog(CourseInfoController.class);
 
 	@Autowired
@@ -70,11 +70,19 @@ public class CourseInfoController extends MyBaseController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Map<String, String> paramMap = new HashMap<String, String>();
 		String courseType = request.getParameter("courseType");
+		int pageNums = request.getParameter("pageNum") == null ? pageNum
+				: Integer.parseInt(request.getParameter("pageNum"));
+		int pageSizes = request.getParameter("pageSize") == null ? pageSize
+				: Integer.parseInt(request.getParameter("pageSize"));
 		paramMap.put("courseType", courseType);
-		List<CourseInfo> courseInfoList = courseInfoService
-				.getCourseInfoByType(paramMap);
+		Page<CourseInfo> page = courseInfoService.getCourseInfoByType(paramMap,
+				pageNums, pageSizes);
+		resultMap.put("pageNum", page.getPageNum());
+		resultMap.put("pageSize", page.getPageSize());
+		resultMap.put("page", page.getPages());
+		resultMap.put("total", page.getTotal());
 		resultMap.put("courseInfoList",
-				courseInfoConvertor.convertVOList(courseInfoList));
+				courseInfoConvertor.convertVOList(page.getResult()));
 		return ResponseUtils.sendSuccess(resultMap);
 	}
 
@@ -125,20 +133,23 @@ public class CourseInfoController extends MyBaseController {
 				: Integer.parseInt(request.getParameter("pageSize"));
 		Page<SubscribeCourse> page = subscribeCourseService
 				.selectByUserIdAndPage(getMyselfId(), pageNums, pageSizes);
-		if(CollectionUtils.isNotEmpty(page.getResult())){
-			page.getResult().forEach(p->{
-						CourseInfo courseInfo = courseInfoService.selectByPrimaryKey(p.getCourseId());
-						if(courseInfo==null){
-							logger.info("courseId:"+p.getCourseId()+",课程信息不存在");
-						}else{
+		if (CollectionUtils.isNotEmpty(page.getResult())) {
+			page.getResult().forEach(
+					p -> {
+						CourseInfo courseInfo = courseInfoService
+								.selectByPrimaryKey(p.getCourseId());
+						if (courseInfo == null) {
+							logger.info("courseId:" + p.getCourseId()
+									+ ",课程信息不存在");
+						} else {
 							courseInfoList.add(courseInfo);
 						}
-			});
+					});
 		}
-		resultMap.put("pageNum",page.getPageNum());
-		resultMap.put("pageSize",page.getPageSize());
-		resultMap.put("page",page.getPages());
-		resultMap.put("total",page.getTotal());
+		resultMap.put("pageNum", page.getPageNum());
+		resultMap.put("pageSize", page.getPageSize());
+		resultMap.put("page", page.getPages());
+		resultMap.put("total", page.getTotal());
 		resultMap.put("courseInfoList",
 				courseInfoConvertor.convertVOList(courseInfoList));
 		return ResponseUtils.sendSuccess(resultMap);
