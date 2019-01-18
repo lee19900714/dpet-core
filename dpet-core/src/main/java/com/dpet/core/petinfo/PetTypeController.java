@@ -17,6 +17,9 @@ import com.dpet.framework.ResponseUtils;
 import com.dpet.model.PetTypeInfo;
 import com.dpet.service.inter.PetTypeInfoService;
 
+/**
+ * The type Pet type controller.
+ */
 @RestController
 @RequestMapping(value = "ipet/pettype")
 public class PetTypeController extends MyBaseController {
@@ -27,7 +30,11 @@ public class PetTypeController extends MyBaseController {
 	@Autowired
 	private PetTypeConvertor petTypeConvertor;
 
-	/** 获取宠物类型列表接口 */
+	/**
+	 * 获取宠物类型列表接口  @param request the request
+	 *
+	 * @return the object
+	 */
 	@RequestMapping("/petTypeList")
 	@ResponseBody
 	public Object petTypeList(HttpServletRequest request) {

@@ -17,26 +17,35 @@ import com.dpet.model.Proposal;
 import com.dpet.service.inter.ProposalService;
 import com.dpet.vo.ProposalVO;
 
+/**
+ * The type Proposal controller.
+ */
 @RestController
 @RequestMapping(value = "ipet/proposal")
 public class ProposalController extends MyBaseController {
 
-	@Autowired
-	private ProposalService proposalService;
+    @Autowired
+    private ProposalService proposalService;
 
-	@Autowired
-	private ProposalConvertor proposalConvertor;
+    @Autowired
+    private ProposalConvertor proposalConvertor;
 
-	@RequestMapping(value = "/proposal")
-	@ResponseBody
-	public Object upLoadPetInfo(ProposalVO proposalVO) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		Proposal model = proposalConvertor.convertModel(proposalVO);
-		model.setId(UUIDUtil.getUUID());
-		model.setCreateTime(new Date());
-		model.setCreateId(getMyselfId());
-		proposalService.insert(model);
-		return ResponseUtils.sendSuccess(resultMap);
-	}
+    /**
+     * 意见反馈
+     *
+     * @param proposalVO the proposal vo
+     * @return the object
+     */
+    @RequestMapping(value = "/feedback")
+    @ResponseBody
+    public Object feedback(ProposalVO proposalVO) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Proposal model = proposalConvertor.convertModel(proposalVO);
+        model.setId(UUIDUtil.getUUID());
+        model.setCreateTime(new Date());
+        model.setCreateId(getMyselfId());
+        proposalService.insert(model);
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
 }

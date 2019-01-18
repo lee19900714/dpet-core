@@ -27,6 +27,8 @@ import com.dpet.service.inter.PetInfoService;
 import com.dpet.vo.PetInfoVO;
 
 /**
+ * The type Pet controller.
+ *
  * @author lee 宠物信息操作接口
  */
 @RestController
@@ -43,9 +45,9 @@ public class PetController extends MyBaseController {
 
 	/**
 	 * 上传宠物信息
-	 * 
-	 * @param petInfo
-	 * @return
+	 *
+	 * @param petInfoVO the pet info vo
+	 * @return object
 	 */
 	@RequestMapping(value = "/upLoadPetInfo", method = { RequestMethod.POST })
 	@ResponseBody
@@ -76,6 +78,12 @@ public class PetController extends MyBaseController {
 		return petInfoConvertor.convertModel(petInfoVO);
 	}
 
+	/**
+	 * Pet info object.
+	 *
+	 * @param request the request
+	 * @return the object
+	 */
 	@RequestMapping(value = "/myPetInfo", method = { RequestMethod.GET })
 	@ResponseBody
 	public Object petInfo(HttpServletRequest request) {

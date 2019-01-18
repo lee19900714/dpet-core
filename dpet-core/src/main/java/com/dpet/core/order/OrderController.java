@@ -24,54 +24,60 @@ import com.dpet.model.OrderInfo;
 import com.dpet.service.inter.CourseInfoService;
 import com.dpet.service.inter.OrderInfoService;
 
+/**
+ * The type Order controller.
+ */
 @RestController
 @RequestMapping(value = "ipet/orderinfo")
 public class OrderController extends MyBaseController {
 
-	@Autowired
-	private OrderInfoService orderInfoService;
+    @Autowired
+    private OrderInfoService orderInfoService;
 
-	@Autowired
-	private CourseInfoService courseInfoService;
+    @Autowired
+    private CourseInfoService courseInfoService;
 
-	/*
-	 * 订单下单接口
-	 */
-	@RequestMapping(value = "/prePayOrder", method = { RequestMethod.POST })
-	@ResponseBody
-	public Object prePayOrder(HttpServletRequest request) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String courseIds = request.getParameter("courseIds");
-		List<CourseInfo> courseInfos = new ArrayList<CourseInfo>();
-		String[] courseIdsArr = courseIds.split("\\,");
-		for (int i = 0; i < courseIdsArr.length; i++) {
-			CourseInfo courseInfo = courseInfoService
-					.selectByPrimaryKey(courseIdsArr[i]);
-			courseInfos.add(courseInfo);
-		}
-		OrderInfo orderInfo = this.getOrderInfo(courseInfos, courseIds);
-		orderInfoService.insert(orderInfo);
-		return ResponseUtils.sendSuccess(resultMap);
-	}
+    /**
+     * 订单下单接口
+     *
+     * @param request the request
+     * @return the object
+     */
+    @RequestMapping(value = "/prePayOrder", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object prePayOrder(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        String courseIds = request.getParameter("courseIds");
+        List<CourseInfo> courseInfos = new ArrayList<CourseInfo>();
+        String[] courseIdsArr = courseIds.split("\\,");
+        for (int i = 0; i < courseIdsArr.length; i++) {
+            CourseInfo courseInfo = courseInfoService
+                    .selectByPrimaryKey(courseIdsArr[i]);
+            courseInfos.add(courseInfo);
+        }
+        OrderInfo orderInfo = this.getOrderInfo(courseInfos, courseIds);
+        orderInfoService.insert(orderInfo);
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
-	private OrderInfo getOrderInfo(List<CourseInfo> courseInfos,
-			String courseIds) {
-		OrderInfo orderInfo = new OrderInfo();
-		Date date = new Date();
-		double courseCost = 0.00d;
-		orderInfo.setId(UUIDUtil.getUUID());
-		orderInfo.setBuyCourseId(courseIds);
-		orderInfo.setCreateTime(date);
-		orderInfo.setModifierId(getMyselfId());
-		orderInfo.setModifyTime(date);
-		for (CourseInfo courseInfo : courseInfos) {
-			courseCost += courseInfo.getCourseCost();
-		}
-		orderInfo.setOrderAmount(courseCost);
-		orderInfo.setOrderState(OrderStatus.PENDING_PAY);
-		orderInfo.setPayType(PayType.WX_PAY);
-		orderInfo.setUserId(getMyselfId());
-		return orderInfo;
-	}
+    private OrderInfo getOrderInfo(List<CourseInfo> courseInfos,
+                                   String courseIds) {
+        OrderInfo orderInfo = new OrderInfo();
+        Date date = new Date();
+        double courseCost = 0.00d;
+        orderInfo.setId(UUIDUtil.getUUID());
+        orderInfo.setBuyCourseId(courseIds);
+        orderInfo.setCreateTime(date);
+        orderInfo.setModifierId(getMyselfId());
+        orderInfo.setModifyTime(date);
+        for (CourseInfo courseInfo : courseInfos) {
+            courseCost += courseInfo.getCourseCost();
+        }
+        orderInfo.setOrderAmount(courseCost);
+        orderInfo.setOrderState(OrderStatus.PENDING_PAY);
+        orderInfo.setPayType(PayType.WX_PAY);
+        orderInfo.setUserId(getMyselfId());
+        return orderInfo;
+    }
 
 }

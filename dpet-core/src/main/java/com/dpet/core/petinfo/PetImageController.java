@@ -25,8 +25,9 @@ import com.dpet.model.PetImageInfo;
 import com.dpet.service.inter.PetImageInfoService;
 
 /**
- * @author lee
+ * The type Pet image controller.
  *
+ * @author lee
  */
 @RestController
 @RequestMapping(value = "ipet/petimage")
@@ -40,10 +41,13 @@ public class PetImageController extends MyBaseController {
 
 	/**
 	 * 宠物图片上传
-	 * 
-	 * @throws Exception
-	 * @throws IOException
-	 * */
+	 *
+	 * @param petImage the pet image
+	 * @param request  the request
+	 * @return the object
+	 * @throws IOException the io exception
+	 * @throws Exception   the exception
+	 */
 	@RequestMapping(value = "/upLoadPetImage", method = { RequestMethod.POST })
 	@ResponseBody
 	public Object upLoadPetImage(@RequestParam("petImage") MultipartFile petImage, HttpServletRequest request)
@@ -74,10 +78,20 @@ public class PetImageController extends MyBaseController {
 		return petImageInfo;
 	}
 
+	/**
+	 * Gets pet image file path.
+	 *
+	 * @return the pet image file path
+	 */
 	public String getPetImageFilePath() {
 		return petImageFilePath;
 	}
 
+	/**
+	 * Sets pet image file path.
+	 *
+	 * @param petImageFilePath the pet image file path
+	 */
 	public void setPetImageFilePath(String petImageFilePath) {
 		this.petImageFilePath = petImageFilePath;
 	}

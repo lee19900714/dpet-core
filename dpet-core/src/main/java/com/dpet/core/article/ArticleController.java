@@ -25,6 +25,9 @@ import com.dpet.service.inter.SubscribeArticleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
+/**
+ * The type Article controller.
+ */
 @RestController
 @RequestMapping(value = "ipet/articleinfo")
 public class ArticleController extends MyBaseController {
@@ -38,6 +41,12 @@ public class ArticleController extends MyBaseController {
 	@Autowired
 	private ArticleInfoConvertor articleInfoConvertor;
 
+	/**
+	 * Article list object.
+	 *
+	 * @param request the request
+	 * @return the object
+	 */
 	@RequestMapping(value = "/articleList")
 	@ResponseBody
 	public Object articleList(HttpServletRequest request) {
@@ -48,6 +57,12 @@ public class ArticleController extends MyBaseController {
 		return ResponseUtils.sendSuccess(articleInfos);
 	}
 
+	/**
+	 * Article info object.
+	 *
+	 * @param request the request
+	 * @return the object
+	 */
 	@RequestMapping(value = "/articleInfo")
 	@ResponseBody
 	public Object articleInfo(HttpServletRequest request) {
@@ -56,6 +71,12 @@ public class ArticleController extends MyBaseController {
 		return ResponseUtils.sendSuccess(articleInfoConvertor.convertVO(articleInfo));
 	}
 
+	/**
+	 * Subscribe article object.
+	 *
+	 * @param request the request
+	 * @return the object
+	 */
 	@RequestMapping(value = "/subscribeArticle")
 	@ResponseBody
 	public Object subscribeArticle(HttpServletRequest request) {
@@ -65,7 +86,7 @@ public class ArticleController extends MyBaseController {
 			SubscribeArticle sa = this.getsubscribeArticle(articleId, operateType);
 			subscribeArticleService.insert(sa);
 		}else{
-			Map<String, String> ids = new HashMap<String, String>();
+			Map<String, String> ids = new HashMap<>();
 			ids.put("id", articleId);
 			subscribeArticleService.deleteByPrimaryKey(ids);
 		}
@@ -83,7 +104,13 @@ public class ArticleController extends MyBaseController {
 		sa.setSubscribeTime(date);
 		return sa;
 	}
-	
+
+	/**
+	 * My subscribe article object.
+	 *
+	 * @param request the request
+	 * @return the object
+	 */
 	@RequestMapping(value = "/mySubscribeArticle")
 	@ResponseBody
 	public Object mySubscribeArticle(HttpServletRequest request) {
