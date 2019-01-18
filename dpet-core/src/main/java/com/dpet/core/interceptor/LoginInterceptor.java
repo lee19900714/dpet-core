@@ -21,7 +21,8 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
 	
 	protected static Log logger = LogFactory.getLog(LoginInterceptor.class);
 	
-	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler)  throws Exception {
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  throws Exception {
 		
 		if(ActionUtil.getUser() == null){
 			logger.info("**********************登录拦截:"+request.getRequestURI()+"***********************");
@@ -31,14 +32,16 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
 		return true;
 	}
 	
+	@Override
 	public void afterCompletion(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, Exception arg3)
+								HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
 		
 	}
 
+	@Override
 	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2, ModelAndView arg3) throws Exception {
+						   Object arg2, ModelAndView arg3) throws Exception {
 		
 	}
 }

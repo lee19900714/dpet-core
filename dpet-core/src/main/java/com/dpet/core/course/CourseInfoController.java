@@ -37,6 +37,7 @@ import com.github.pagehelper.Page;
 /**
  * The type Course info controller.
  */
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping(value = "ipet/courseinfo")
 public class CourseInfoController extends MyBaseController {
@@ -73,8 +74,8 @@ public class CourseInfoController extends MyBaseController {
     @RequestMapping(value = "/queryCourseList")
     @ResponseBody
     public Object queryCourseList(HttpServletRequest request) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        Map<String, String> paramMap = new HashMap<String, String>();
+        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, String> paramMap = new HashMap<>();
         String courseType = request.getParameter("courseType");
         int pageNums = request.getParameter("pageNum") == null ? pageNum
                 : Integer.parseInt(request.getParameter("pageNum"));

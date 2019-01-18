@@ -27,6 +27,7 @@ import com.dpet.service.inter.OrderInfoService;
 /**
  * The type Order controller.
  */
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping(value = "ipet/orderinfo")
 public class OrderController extends MyBaseController {

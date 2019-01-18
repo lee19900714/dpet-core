@@ -28,6 +28,7 @@ import com.github.pagehelper.PageInfo;
 /**
  * The type Article controller.
  */
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping(value = "ipet/articleinfo")
 public class ArticleController extends MyBaseController {
@@ -86,7 +87,7 @@ public class ArticleController extends MyBaseController {
 			SubscribeArticle sa = this.getsubscribeArticle(articleId, operateType);
 			subscribeArticleService.insert(sa);
 		}else{
-			Map<String, String> ids = new HashMap<>();
+			Map<String, String> ids = new HashMap<>(1);
 			ids.put("id", articleId);
 			subscribeArticleService.deleteByPrimaryKey(ids);
 		}

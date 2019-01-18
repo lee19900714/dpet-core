@@ -20,28 +20,29 @@ import com.dpet.service.inter.PetTypeInfoService;
 /**
  * The type Pet type controller.
  */
+
 @RestController
 @RequestMapping(value = "ipet/pettype")
 public class PetTypeController extends MyBaseController {
 
-	@Autowired
-	private PetTypeInfoService petTypeInfoService;
-	
-	@Autowired
-	private PetTypeConvertor petTypeConvertor;
+    @Autowired
+    private PetTypeInfoService petTypeInfoService;
 
-	/**
-	 * 获取宠物类型列表接口  @param request the request
-	 *
-	 * @return the object
-	 */
-	@RequestMapping("/petTypeList")
-	@ResponseBody
-	public Object petTypeList(HttpServletRequest request) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<PetTypeInfo> petTypeList = petTypeInfoService.selectAll();
-		resultMap.put("petTypeList", petTypeConvertor.convertVOList(petTypeList));
-		return ResponseUtils.sendSuccess(resultMap);
-	}
+    @Autowired
+    private PetTypeConvertor petTypeConvertor;
+
+    /**
+     * 获取宠物类型列表接口  @param request the request
+     *
+     * @return the object
+     */
+    @RequestMapping("/petTypeList")
+    @ResponseBody
+    public Object petTypeList() {
+        Map<String, Object> resultMap = new HashMap<>(1);
+        List<PetTypeInfo> petTypeList = petTypeInfoService.selectAll();
+        resultMap.put("petTypeList", petTypeConvertor.convertVOList(petTypeList));
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
 }

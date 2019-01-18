@@ -33,67 +33,69 @@ import com.dpet.service.inter.PetImageInfoService;
 @RequestMapping(value = "ipet/petimage")
 public class PetImageController extends MyBaseController {
 
-	@Value("${image.petImageFilePath}")
-	private String petImageFilePath;
+    @Value("${image.petImageFilePath}")
+    private String petImageFilePath;
 
-	@Autowired
-	private PetImageInfoService petImageInfoService;
+    @Autowired
+    private PetImageInfoService petImageInfoService;
 
-	/**
-	 * 宠物图片上传
-	 *
-	 * @param petImage the pet image
-	 * @param request  the request
-	 * @return the object
-	 * @throws IOException the io exception
-	 * @throws Exception   the exception
-	 */
-	@RequestMapping(value = "/upLoadPetImage", method = { RequestMethod.POST })
-	@ResponseBody
-	public Object upLoadPetImage(@RequestParam("petImage") MultipartFile petImage, HttpServletRequest request)
-			throws IOException, Exception {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		String contentType = petImage.getContentType(); // 图片文件类型
-		String petId = request.getParameter("petId");
-		String fileName = UUIDUtil.getUUID() + "." + contentType; // 图片名字
-		FileUtil.uploadFile(petImage.getBytes(), petImageFilePath, fileName);
-		PetImageInfo imageInfo = getImageInfo(petImage, fileName, petId);
-		petImageInfoService.insert(imageInfo);
-		return ResponseUtils.sendSuccess(resultMap);
-	}
+    /**
+     * 宠物图片上传
+     *
+     * @param petImage the pet image
+     * @param request  the request
+     * @return the object
+     * @throws IOException the io exception
+     * @throws Exception   the exception
+     */
+    @RequestMapping(value = "/upLoadPetImage", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object upLoadPetImage(@RequestParam("petImage") MultipartFile petImage, HttpServletRequest request)
+            throws IOException, Exception {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        // 图片文件类型
+        String contentType = petImage.getContentType();
+        String petId = request.getParameter("petId");
+        // 图片名字
+        String fileName = UUIDUtil.getUUID() + "." + contentType;
+        FileUtil.uploadFile(petImage.getBytes(), petImageFilePath, fileName);
+        PetImageInfo imageInfo = getImageInfo(petImage, fileName, petId);
+        petImageInfoService.insert(imageInfo);
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
-	private PetImageInfo getImageInfo(MultipartFile petImage, String fileName, String petId) {
-		PetImageInfo petImageInfo = new PetImageInfo();
-		Date date = new Date();
-		petImageInfo.setId(fileName);
-		petImageInfo.setCheckedOpinion(StringUtils.EMPTY);
-		petImageInfo.setCheckedTime(date);
-		petImageInfo.setChecker(StringUtils.EMPTY);
-		petImageInfo.setCreateId(getMyselfId());
-		petImageInfo.setCreateTime(date);
-		petImageInfo.setIsChecked(0);
-		petImageInfo.setModifyTime(date);
-		petImageInfo.setPetId(petId);
-		petImageInfo.setPetImageUrl(petImageFilePath + fileName);
-		return petImageInfo;
-	}
+    private PetImageInfo getImageInfo(MultipartFile petImage, String fileName, String petId) {
+        PetImageInfo petImageInfo = new PetImageInfo();
+        Date date = new Date();
+        petImageInfo.setId(fileName);
+        petImageInfo.setCheckedOpinion(StringUtils.EMPTY);
+        petImageInfo.setCheckedTime(date);
+        petImageInfo.setChecker(StringUtils.EMPTY);
+        petImageInfo.setCreateId(getMyselfId());
+        petImageInfo.setCreateTime(date);
+        petImageInfo.setIsChecked(0);
+        petImageInfo.setModifyTime(date);
+        petImageInfo.setPetId(petId);
+        petImageInfo.setPetImageUrl(petImageFilePath + fileName);
+        return petImageInfo;
+    }
 
-	/**
-	 * Gets pet image file path.
-	 *
-	 * @return the pet image file path
-	 */
-	public String getPetImageFilePath() {
-		return petImageFilePath;
-	}
+    /**
+     * Gets pet image file path.
+     *
+     * @return the pet image file path
+     */
+    public String getPetImageFilePath() {
+        return petImageFilePath;
+    }
 
-	/**
-	 * Sets pet image file path.
-	 *
-	 * @param petImageFilePath the pet image file path
-	 */
-	public void setPetImageFilePath(String petImageFilePath) {
-		this.petImageFilePath = petImageFilePath;
-	}
+    /**
+     * Sets pet image file path.
+     *
+     * @param petImageFilePath the pet image file path
+     */
+    public void setPetImageFilePath(String petImageFilePath) {
+        this.petImageFilePath = petImageFilePath;
+    }
 
 }

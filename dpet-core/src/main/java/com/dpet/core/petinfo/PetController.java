@@ -26,6 +26,8 @@ import com.dpet.model.PetInfo;
 import com.dpet.service.inter.PetInfoService;
 import com.dpet.vo.PetInfoVO;
 
+import static javax.swing.UIManager.get;
+
 /**
  * The type Pet controller.
  *
@@ -35,63 +37,66 @@ import com.dpet.vo.PetInfoVO;
 @RequestMapping(value = "ipet/petinfo")
 public class PetController extends MyBaseController {
 
-	private static Log logger = LogFactory.getLog(PetController.class);
+    private static Log logger = LogFactory.getLog(PetController.class);
 
-	@Autowired
-	private PetInfoService petInfoService;
+    @Autowired
+    private PetInfoService petInfoService;
 
-	@Autowired
-	private PetInfoConvertor petInfoConvertor;
+    @Autowired
+    private PetInfoConvertor petInfoConvertor;
 
-	/**
-	 * 上传宠物信息
-	 *
-	 * @param petInfoVO the pet info vo
-	 * @return object
-	 */
-	@RequestMapping(value = "/upLoadPetInfo", method = { RequestMethod.POST })
-	@ResponseBody
-	public Object upLoadPetInfo(@RequestBody PetInfoVO petInfoVO) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		// 数据完整性校验 不做 提高用户体验
-		// 数据格式校验
-		PetInfo p = this.getPetInfo(petInfoVO);
-		p.setUserId(getMyselfId());
-		// 幂等性校验
-		List<PetInfo> petCheck = petInfoService.selectByUserId(getMyselfId());
-		if (CollectionUtils.isNotEmpty(petCheck)) {
-			logger.info("新增失败，已存在宠物关联记录");
-			resultMap.put("petInfo", petInfoConvertor.convertVOList(petCheck));
-		} else {
-			petInfoService.insert(p);
-			logger.info("新增成功");
-			resultMap.put("petInfo", petInfoConvertor.convertVO(p));
-		}
-		return ResponseUtils.sendSuccess(resultMap);
-	}
+    /**
+     * 上传宠物信息
+     *
+     * @param petInfoVO the pet info vo
+     * @return object
+     */
+    @RequestMapping(value = "/upLoadPetInfo", method = {RequestMethod.POST})
+    @ResponseBody
+    public Object upLoadPetInfo(@RequestBody PetInfoVO petInfoVO) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        // 数据完整性校验 不做 提高用户体验
+        // 数据格式校验
+        // 幂等性校验
+        List<PetInfo> petCheck = petInfoService.selectByUserId(getMyselfId());
+        if (CollectionUtils.isNotEmpty(petCheck)) {
+            logger.info("新增失败，已存在宠物关联记录");
+            resultMap.put("petInfo", petInfoConvertor.convertVOList(petCheck));
+        } else {
+            PetInfo p = this.getPetInfo(petInfoVO);
+            p.setUserId(getMyselfId());
+            petInfoService.insert(p);
+            logger.info("新增成功");
+            resultMap.put("petInfo", petInfoConvertor.convertVO(p));
+        }
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
-	private PetInfo getPetInfo(PetInfoVO petInfoVO) {
-		Date date = new Date();
-		petInfoVO.setId(UUIDUtil.getUUID());
-		petInfoVO.setCreateTime(DateUtil.formatDateToString(date, DateUtil.Y_M_D_HMS));
-		petInfoVO.setModifyTime(DateUtil.formatDateToString(date, DateUtil.Y_M_D_HMS));
-		return petInfoConvertor.convertModel(petInfoVO);
-	}
+    /**
+     * Pet info object.
+     *
+     * @param request the request
+     * @return the object
+     */
+    @RequestMapping(value = "/myPetInfo", method = {RequestMethod.GET})
+    @ResponseBody
+    public Object petInfo(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>(1);
+        List<PetInfo> petInfos = petInfoService.selectByUserId(getMyselfId());
+        if (!CollectionUtils.isEmpty(petInfos)) {
+            resultMap.put("petInfo", petInfoConvertor.convertVO(petInfos.get(0)));
+        }
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 
-	/**
-	 * Pet info object.
-	 *
-	 * @param request the request
-	 * @return the object
-	 */
-	@RequestMapping(value = "/myPetInfo", method = { RequestMethod.GET })
-	@ResponseBody
-	public Object petInfo(HttpServletRequest request) {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		PetInfo petInfo = petInfoService.selectByUserId(getMyselfId()).get(0);
-		resultMap.put("petInfo", petInfoConvertor.convertVO(petInfo));
-		return ResponseUtils.sendSuccess(resultMap);
-	}
-	
-	
+
+    private PetInfo getPetInfo(PetInfoVO petInfoVO) {
+        Date date = new Date();
+        petInfoVO.setId(UUIDUtil.getUUID());
+        petInfoVO.setCreateTime(DateUtil.formatDateToString(date, DateUtil.Y_M_D_HMS));
+        petInfoVO.setModifyTime(DateUtil.formatDateToString(date, DateUtil.Y_M_D_HMS));
+        return petInfoConvertor.convertModel(petInfoVO);
+    }
+
+
 }
