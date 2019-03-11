@@ -73,7 +73,7 @@ public class PetController extends MyBaseController {
     }
 
     /**
-     * Pet info object.
+     * 我的宠物信息·
      *
      * @param request the request
      * @return the object

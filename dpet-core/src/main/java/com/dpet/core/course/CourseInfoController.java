@@ -168,4 +168,20 @@ public class CourseInfoController extends MyBaseController {
                 courseInfoConvertor.convertVOList(courseInfoList));
         return ResponseUtils.sendSuccess(resultMap);
     }
+
+
+    /**
+     * 课程基本信息列表
+     *
+     * @param request the request
+     * @return the object
+     */
+    @RequestMapping(value = "/queryCourseById")
+    @ResponseBody
+    public Object queryCourseById(String id) {
+        Map<String, Object> resultMap = new HashMap<>(1);
+        CourseInfo courseInfo = courseInfoService.selectByPrimaryKey(id);
+        resultMap.put("courseInfo", courseInfoConvertor.convertVO(courseInfo));
+        return ResponseUtils.sendSuccess(resultMap);
+    }
 }

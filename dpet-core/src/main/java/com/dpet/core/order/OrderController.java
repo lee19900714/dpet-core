@@ -50,7 +50,7 @@ public class OrderController extends MyBaseController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         String courseIds = request.getParameter("courseIds");
         List<CourseInfo> courseInfos = new ArrayList<CourseInfo>();
-        String[] courseIdsArr = courseIds.split("\\,");
+        String[] courseIdsArr = courseIds.split(",");
         for (int i = 0; i < courseIdsArr.length; i++) {
             CourseInfo courseInfo = courseInfoService
                     .selectByPrimaryKey(courseIdsArr[i]);
