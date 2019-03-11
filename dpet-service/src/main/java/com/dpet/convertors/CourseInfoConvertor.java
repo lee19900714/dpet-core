@@ -1,14 +1,9 @@
 package com.dpet.convertors;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.stereotype.Component;
-
 import com.dpet.commons.utils.DateUtil;
 import com.dpet.model.CourseInfo;
 import com.dpet.vo.CourseInfoVO;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CourseInfoConvertor implements BeanConvertor<CourseInfo, CourseInfoVO> {
@@ -67,25 +62,5 @@ public class CourseInfoConvertor implements BeanConvertor<CourseInfo, CourseInfo
 		vo.setSaleState(model.getSaleState()+"");
 		vo.setTrainerInfo(model.getTrainerInfo());
 		return vo;
-	}
-
-	@Override
-	public List<CourseInfo> convertModelList(List<CourseInfoVO> listvo) {
-		if(CollectionUtils.isEmpty(listvo)){
-			return new ArrayList<CourseInfo>();
-		}
-		List<CourseInfo> courseInfos = new ArrayList<CourseInfo>();
-		listvo.forEach(s->courseInfos.add(convertModel(s)));
-		return courseInfos;
-	}
-
-	@Override
-	public List<CourseInfoVO> convertVOList(List<CourseInfo> listvo) {
-		if(CollectionUtils.isEmpty(listvo)){
-			return new ArrayList<CourseInfoVO>();
-		}
-		List<CourseInfoVO> courseInfoVOs = new ArrayList<CourseInfoVO>();
-		listvo.forEach(s->courseInfoVOs.add(convertVO(s)));
-		return courseInfoVOs;
 	}
 }

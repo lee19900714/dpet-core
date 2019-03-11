@@ -2,6 +2,7 @@ package com.dpet.service.impl;
 
 import java.util.Map;
 
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,8 +49,8 @@ public class ArticleInfoServiceImpl implements ArticleInfoService {
 	}
 
 	@Override
-	public PageInfo<ArticleInfo> selectByPage(int pageNum,int pageSize) {
+	public Page<ArticleInfo> selectByPage(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		return (PageInfo<ArticleInfo>) articleInfoMapper.selectByPage();
+		return (Page<ArticleInfo>) articleInfoMapper.selectByPage();
 	}
 }

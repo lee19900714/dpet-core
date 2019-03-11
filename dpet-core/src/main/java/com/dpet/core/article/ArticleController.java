@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.dpet.convertors.SubscribeArticleInfoConvert;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class ArticleController extends MyBaseController {
     private SubscribeArticleService subscribeArticleService;
     @Autowired
     private ArticleInfoConvertor articleInfoConvertor;
+    @Autowired
+    private SubscribeArticleInfoConvert subscribeArticleInfoConvert;
 
     /**
      * 文章列表
@@ -51,11 +54,16 @@ public class ArticleController extends MyBaseController {
     @RequestMapping(value = "/articleList")
     @ResponseBody
     public Object articleList(HttpServletRequest request) {
-        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-        PageInfo<ArticleInfo> articleInfos = articleInfoService.selectByPage(
-                pageNum, pageSize);
-        return ResponseUtils.sendSuccess(articleInfos);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        int pageNums = request.getParameter("pageNum") == null ? pageNum : Integer.parseInt(request.getParameter("pageNum"));
+        int pageSizes = request.getParameter("pageSize") == null ? pageSize : Integer.parseInt(request.getParameter("pageSize"));
+        Page<ArticleInfo> articleInfos = articleInfoService.selectByPage(pageNums, pageSizes);
+        resultMap.put("pageNum", articleInfos.getPageNum());
+        resultMap.put("pageSize", articleInfos.getPageSize());
+        resultMap.put("page", articleInfos.getPages());
+        resultMap.put("total", articleInfos.getTotal());
+        resultMap.put("articles",articleInfoConvertor.convertVOList(articleInfos.getResult()));
+        return ResponseUtils.sendSuccess(resultMap);
     }
 
     /**
@@ -115,9 +123,15 @@ public class ArticleController extends MyBaseController {
     @RequestMapping(value = "/mySubscribeArticle")
     @ResponseBody
     public Object mySubscribeArticle(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         int pageNums = request.getParameter("pageNum") == null ? pageNum : Integer.parseInt(request.getParameter("pageNum"));
         int pageSizes = request.getParameter("pageSize") == null ? pageSize : Integer.parseInt(request.getParameter("pageSize"));
         Page<SubscribeArticle> mySubscribeArticle = subscribeArticleService.selectByUserIdAndPage(getMyselfId(), pageNums, pageSizes);
-        return ResponseUtils.sendSuccess(mySubscribeArticle);
+        resultMap.put("articles",subscribeArticleInfoConvert.convertVOList(mySubscribeArticle.getResult()));
+        resultMap.put("pageNum", mySubscribeArticle.getPageNum());
+        resultMap.put("pageSize", mySubscribeArticle.getPageSize());
+        resultMap.put("page", mySubscribeArticle.getPages());
+        resultMap.put("total", mySubscribeArticle.getTotal());
+        return ResponseUtils.sendSuccess(resultMap);
     }
 }

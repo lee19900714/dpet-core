@@ -49,9 +49,8 @@ public class SubscribeArticleServiceImpl implements SubscribeArticleService {
 	}
 	
 	@Override
-	public Page<SubscribeArticle> selectByUserIdAndPage(String userId,
-			int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);	
+	public Page<SubscribeArticle> selectByUserIdAndPage(String userId, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
 		return (Page<SubscribeArticle>) subscribeArticleMapper.selectByUserIdAndPage(userId);
 	}
 

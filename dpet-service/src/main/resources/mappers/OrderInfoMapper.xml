@@ -1,61 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dpet.dao.OrderInfoMapper">
-	<resultMap id="BaseResultMap" type="com.dpet.model.OrderInfo">
-		<id column="id" jdbcType="CHAR" property="id" />
-		<id column="order_no" jdbcType="CHAR" property="orderNo" />
-		<id column="buy_course_id" jdbcType="CHAR" property="buyCourseId" />
-		<id column="user_id" jdbcType="CHAR" property="userId" />
-		<result column="order_amount" jdbcType="DOUBLE" property="orderAmount" />
-		<result column="pay_type" jdbcType="VARCHAR" property="payType" />
-		<result column="order_state" jdbcType="INTEGER" property="orderState" />
-		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-		<result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-		<result column="modifier_id" jdbcType="CHAR" property="modifierId" />
-	</resultMap>
-	<sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.dpet.model.OrderInfo">
+        <id column="id" jdbcType="CHAR" property="id"/>
+        <id column="order_no" jdbcType="CHAR" property="orderNo"/>
+        <id column="buy_course_id" jdbcType="CHAR" property="buyCourseId"/>
+        <id column="user_id" jdbcType="CHAR" property="userId"/>
+        <result column="order_amount" jdbcType="DOUBLE" property="orderAmount"/>
+        <result column="pay_type" jdbcType="VARCHAR" property="payType"/>
+        <result column="order_state" jdbcType="INTEGER" property="orderState"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="modifier_id" jdbcType="CHAR" property="modifierId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
 		id, order_no, buy_course_id, user_id, order_amount,
 		pay_type,
 		order_state, create_time,
 		modify_time, modifier_id
 	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.util.Map"
-		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from order_info
-		where 1=1
-		<if test="id != null">
-			and id = #{id,jdbcType=CHAR}
-		</if>
-		<if test="orderNo != null">
-			and order_no = #{orderNo,jdbcType=CHAR}
-		</if>
-		<if test="buyCourseId != null">
-			and buy_course_id = #{buyCourseId,jdbcType=CHAR}
-		</if>
-		<if test="userId != null">
-			and user_id = #{userId,jdbcType=CHAR}
-		</if>
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.util.Map">
-		delete from
-		order_info
-		where 1=1
-		<if test="id != null">
-			and id = #{id,jdbcType=CHAR}
-		</if>
-		<if test="orderNo != null">
-			and order_no = #{orderNo,jdbcType=CHAR}
-		</if>
-		<if test="buyCourseId != null">
-			and buy_course_id = #{buyCourseId,jdbcType=CHAR}
-		</if>
-		<if test="userId != null">
-			and user_id = #{userId,jdbcType=CHAR}
-		</if>
-	</delete>
-	<insert id="insert" parameterType="com.dpet.model.OrderInfo">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where id = #{id,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+        delete from
+        order_info
+        where 1=1
+        <if test="id != null">
+            and id = #{id,jdbcType=CHAR}
+        </if>
+        <if test="orderNo != null">
+            and order_no = #{orderNo,jdbcType=CHAR}
+        </if>
+        <if test="buyCourseId != null">
+            and buy_course_id = #{buyCourseId,jdbcType=CHAR}
+        </if>
+        <if test="userId != null">
+            and user_id = #{userId,jdbcType=CHAR}
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.dpet.model.OrderInfo">
 		insert into order_info (id,
 		order_no, buy_course_id,
 		user_id, order_amount, pay_type,
@@ -72,102 +60,102 @@
 		#{modifyTime,jdbcType=TIMESTAMP},
 		#{modifierId,jdbcType=CHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.dpet.model.OrderInfo">
-		insert into order_info
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="orderNo != null">
-				order_no,
-			</if>
-			<if test="buyCourseId != null">
-				buy_course_id,
-			</if>
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="orderAmount != null">
-				order_amount,
-			</if>
-			<if test="payType != null">
-				pay_type,
-			</if>
-			<if test="orderState != null">
-				order_state,
-			</if>
-			<if test="createTime != null">
-				create_time,
-			</if>
-			<if test="modifyTime != null">
-				modify_time,
-			</if>
-			<if test="modifierId != null">
-				modifier_id,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=CHAR},
-			</if>
-			<if test="orderNo != null">
-				#{orderNo,jdbcType=CHAR},
-			</if>
-			<if test="buyCourseId != null">
-				#{buyCourseId,jdbcType=CHAR},
-			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=CHAR},
-			</if>
-			<if test="orderAmount != null">
-				#{orderAmount,jdbcType=DOUBLE},
-			</if>
-			<if test="payType != null">
-				#{payType,jdbcType=VARCHAR},
-			</if>
-			<if test="orderState != null">
-				#{orderState,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="modifyTime != null">
-				#{modifyTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="modifierId != null">
-				#{modifierId,jdbcType=CHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.OrderInfo">
-		update order_info
-		<set>
-			<if test="orderAmount != null">
-				order_amount = #{orderAmount,jdbcType=DOUBLE},
-			</if>
-			<if test="payType != null">
-				pay_type = #{payType,jdbcType=VARCHAR},
-			</if>
-			<if test="orderState != null">
-				order_state = #{orderState,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="modifyTime != null">
-				modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="modifierId != null">
-				modifier_id = #{modifierId,jdbcType=CHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=CHAR}
-		and order_no = #{orderNo,jdbcType=CHAR}
-		and buy_course_id = #{buyCourseId,jdbcType=CHAR}
-		and user_id =
-		#{userId,jdbcType=CHAR}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.dpet.model.OrderInfo">
+    <insert id="insertSelective" parameterType="com.dpet.model.OrderInfo">
+        insert into order_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="buyCourseId != null">
+                buy_course_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="orderState != null">
+                order_state,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="modifierId != null">
+                modifier_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=CHAR},
+            </if>
+            <if test="buyCourseId != null">
+                #{buyCourseId,jdbcType=CHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=CHAR},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderState != null">
+                #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifierId != null">
+                #{modifierId,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.OrderInfo">
+        update order_info
+        <set>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifierId != null">
+                modifier_id = #{modifierId,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=CHAR}
+        and order_no = #{orderNo,jdbcType=CHAR}
+        and buy_course_id = #{buyCourseId,jdbcType=CHAR}
+        and user_id =
+        #{userId,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dpet.model.OrderInfo">
 		update order_info
 		set order_amount = #{orderAmount,jdbcType=DOUBLE},
 		pay_type =
@@ -187,4 +175,11 @@
 		#{buyCourseId,jdbcType=CHAR}
 		and user_id = #{userId,jdbcType=CHAR}
 	</update>
+    <select id="selectByUserId" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where user_id = #{userId,jdbcType=CHAR}
+    </select>
 </mapper>
