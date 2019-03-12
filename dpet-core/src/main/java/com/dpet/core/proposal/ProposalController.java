@@ -8,9 +8,7 @@ import com.dpet.model.Proposal;
 import com.dpet.service.inter.ProposalService;
 import com.dpet.vo.ProposalVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -34,9 +32,9 @@ public class ProposalController extends MyBaseController {
      * @param proposalVO the proposal vo
      * @return the object
      */
-    @RequestMapping(value = "/feedback")
+    @RequestMapping(value = "/feedback", method = {RequestMethod.POST})
     @ResponseBody
-    public Object feedback(ProposalVO proposalVO) {
+    public Object feedback(@RequestBody ProposalVO proposalVO) {
         Proposal model = proposalConvertor.convertModel(proposalVO);
         model.setId(UUIDUtil.getUUID());
         model.setCreateTime(new Date());

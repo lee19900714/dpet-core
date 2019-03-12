@@ -13,11 +13,9 @@ public class ProposalConvertor implements BeanConvertor<Proposal, ProposalVO> {
     @Override
     public Proposal convertModel(ProposalVO vo) {
         Proposal p = new Proposal();
-        try {
-            BeanUtils.copyProperties(p, vo);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        p.setPhoneNo(vo.getPhoneNo());
+        p.setProposal(vo.getProposal());
+        p.setProposalUrl(vo.getProposalUrl());
         return p;
     }
 
