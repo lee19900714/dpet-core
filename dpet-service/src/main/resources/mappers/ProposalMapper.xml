@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dpet.dao.ProposalMapper">
-  <resultMap id="BaseResultMap" type="com.dpet.model.Proposal">
-    <id column="id" jdbcType="CHAR" property="id" />
-    <result column="proposal" jdbcType="VARCHAR" property="proposal" />
-    <result column="proposal_url" jdbcType="VARCHAR" property="proposalUrl" />
-    <result column="phone_no" jdbcType="VARCHAR" property="phoneNo" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_id" jdbcType="CHAR" property="createId" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.dpet.model.Proposal">
+        <id column="id" jdbcType="CHAR" property="id"/>
+        <result column="proposal" jdbcType="VARCHAR" property="proposal"/>
+        <result column="proposal_url" jdbcType="VARCHAR" property="proposalUrl"/>
+        <result column="phone_no" jdbcType="VARCHAR" property="phoneNo"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_id" jdbcType="CHAR" property="createId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, proposal, proposal_url, phone_no, create_time, create_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from proposal
-    where id = #{id,jdbcType=CHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.util.Map">
+    <select id="selectByPrimaryKey" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from proposal
+        where id = #{id,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.util.Map">
     delete from proposal
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.dpet.model.Proposal">
+    <insert id="insert" parameterType="com.dpet.model.Proposal">
     insert into proposal (id, proposal, proposal_url, 
       phone_no, create_time, create_id
       )
@@ -30,71 +30,71 @@
       #{phoneNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dpet.model.Proposal">
-    insert into proposal
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="proposal != null">
-        proposal,
-      </if>
-      <if test="proposalUrl != null">
-        proposal_url,
-      </if>
-      <if test="phoneNo != null">
-        phone_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createId != null">
-        create_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=CHAR},
-      </if>
-      <if test="proposal != null">
-        #{proposal,jdbcType=VARCHAR},
-      </if>
-      <if test="proposalUrl != null">
-        #{proposalUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNo != null">
-        #{phoneNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        #{createId,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.Proposal">
-    update proposal
-    <set>
-      <if test="proposal != null">
-        proposal = #{proposal,jdbcType=VARCHAR},
-      </if>
-      <if test="proposalUrl != null">
-        proposal_url = #{proposalUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="phoneNo != null">
-        phone_no = #{phoneNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createId != null">
-        create_id = #{createId,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dpet.model.Proposal">
+    <insert id="insertSelective" parameterType="com.dpet.model.Proposal">
+        insert into proposal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="proposal != null">
+                proposal,
+            </if>
+            <if test="proposalUrl != null">
+                proposal_url,
+            </if>
+            <if test="phoneNo != null">
+                phone_no,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=CHAR},
+            </if>
+            <if test="proposal != null">
+                #{proposal,jdbcType=VARCHAR},
+            </if>
+            <if test="proposalUrl != null">
+                #{proposalUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNo != null">
+                #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dpet.model.Proposal">
+        update proposal
+        <set>
+            <if test="proposal != null">
+                proposal = #{proposal,jdbcType=VARCHAR},
+            </if>
+            <if test="proposalUrl != null">
+                proposal_url = #{proposalUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNo != null">
+                phone_no = #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dpet.model.Proposal">
     update proposal
     set proposal = #{proposal,jdbcType=VARCHAR},
       proposal_url = #{proposalUrl,jdbcType=VARCHAR},
@@ -103,4 +103,10 @@
       create_id = #{createId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from proposal
+        order by create_time desc
+    </select>
 </mapper>

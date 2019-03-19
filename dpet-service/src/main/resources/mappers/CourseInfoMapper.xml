@@ -273,5 +273,6 @@
 		<if test="courseType != null">
 			and course_type = #{courseType,jdbcType=INTEGER}
 		</if>
+		order by create_time desc
 	</select>
 </mapper>
