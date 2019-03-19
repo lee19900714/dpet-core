@@ -193,68 +193,72 @@
                 <div class="modal-body">
                     <form class="form-inline">
                         <div class="form-group">
-                            <label for="exampleInputName2">课程名</label>
-                            <input type="text" class="form-control" id="exampleInputName2" placeholder="课程名">
+                            <label for="courseName">课程名</label>
+                            <input type="text" class="form-control" id="courseName" placeholder="课程名">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程标题</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="课程标题">
+                            <label for="courseTitle">课程标题</label>
+                            <input type="text" class="form-control" id="courseTitle" placeholder="课程标题">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程描述</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="课程描述">
+                            <label for="courseDesc">课程描述</label>
+                            <input type="text" class="form-control" id="courseDesc" placeholder="课程描述">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程类型</label>
-                            <select class="form-control">
-                                <option>散课</option>
-                                <option>系列课程</option>
+                            <label for="courseType">课程类型</label>
+                            <select class="form-control" id="courseType">
+                                <option value="1">散课</option>
+                                <option value="2">系列课程</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">上下架状态</label>
-                            <select class="form-control">
-                                <option>上架</option>
-                                <option>下架</option>
+                            <label for="saleState">上下架状态</label>
+                            <select class="form-control" id="saleState">
+                                <option value="1">上架</option>
+                                <option value="2">下架</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">训练师</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="训练师">
+                            <label for="trainerInfo">训练师</label>
+                            <input type="text" class="form-control" id="trainerInfo" placeholder="训练师">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程平均时长</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="课程平均时长">
+                            <label for="courseLengthTime">课程平均时长</label>
+                            <input type="text" class="form-control" id="courseLengthTime" placeholder="课程平均时长">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程标签</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="课程标签">
+                            <label for="courseLabel">课程标签</label>
+                            <input type="text" class="form-control" id="courseLabel" placeholder="课程标签">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程费用</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="课程费用">
+                            <label for="courseCost">课程费用</label>
+                            <input type="text" class="form-control" id="courseCost" placeholder="课程费用">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">课程难度</label>
-                            <select class="form-control">
-                                <option>高</option>
-                                <option>中</option>
-                                <option>低</option>
+                            <label for="level">课程难度</label>
+                            <select class="form-control" id="level">
+                                <option value="1">高</option>
+                                <option value="2">中</option>
+                                <option value="3">低</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">详细步骤</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="详细步骤">
+                            <label for="learningStep">详细步骤</label>
+                            <input type="text" class="form-control" id="learningStep" placeholder="详细步骤">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail2">排序权重</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="排序权重">
+                            <label for="courseOrder">排序权重</label>
+                            <input type="text" class="form-control" id="courseOrder" placeholder="排序权重">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">课程封面</label>
+                            <input type="file" id="courseImage" name="courseImage" style="display: inline-block;">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" onclick="fileUoload();">保存</button>
                 </div>
             </div>
         </div>
@@ -263,8 +267,44 @@
 <script src="../static/web/plugin/jquery/jquery.js"></script>
 <script src="../static/web/bootstrap/js/bootstrap.min.js"></script>
 <script src="../static/web/js/frame-base.js"></script>
+<script src="../static/web/js/ajaxfileupload.js"></script>
 <script>
     $('#myModal').modal(options);
+
+    function fileUoload() {
+        //2.通过jq获得input数组
+        var $inputArr = $('#myModal input[type=text]');
+        var $select = $('#myModal select');
+        var map = {};
+        //3.循环处理input,并定义结果集
+        $inputArr.each(function () {
+            //4.将每个input的值放进结果集
+            map[$(this).attr("id")] = $(this).val();
+        });
+        $select.each(function () {
+            //4.将每个input的值放进结果集
+            map[$(this).attr("id")] = $(this).val();
+        });
+        //5.打印结果
+        console.log(map);
+        $.ajaxFileUpload({
+            url: '/course/insert',             //用于文件上传的服务器端请求地址
+            type: 'post',
+            data: map,
+            secureuri: false,                   //是否需要安全协议，一般设置为false
+            fileElementId: ['courseImage'],        //文件上传域的ID 在这里设置要上传的多个input的ID
+            dataType: 'json',                   //返回值类型 一般设置为json
+            success: function (data){    //服务器成功响应处理函数
+                if (data) {
+                    alert("新增成功");
+
+                } else {
+                    alert("新增失败");
+                }
+            }
+        });
+    }
+
 </script>
 
 </html>

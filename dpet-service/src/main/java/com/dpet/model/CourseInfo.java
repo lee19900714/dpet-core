@@ -2,7 +2,7 @@ package com.dpet.model;
 
 import java.util.Date;
 
-public class CourseInfo extends MetaModel{
+public class CourseInfo extends MetaModel {
     private String id;
 
     private String courseName;
@@ -31,9 +31,9 @@ public class CourseInfo extends MetaModel{
 
     private String learningStep;
 
-    private Integer learningTimes;
+    private Integer learningTimes = 0;
 
-    private Integer joinerCount;
+    private Integer joinerCount = 0;
 
     private Date createTime;
 

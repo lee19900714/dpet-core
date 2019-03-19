@@ -26,9 +26,7 @@ public class CourseInfoConvertor implements BeanConvertor<CourseInfo, CourseInfo
 		courseInfo.setCreateId(vo.getCreateId());
 		courseInfo.setCreateTime(DateUtil.formatStringToDate(vo.getCreateTime(), DateUtil.Y_M_D_HMS));
 		courseInfo.setId(vo.getId());
-		courseInfo.setJoinerCount(Integer.parseInt(vo.getJoinerCount()));
 		courseInfo.setLearningStep(vo.getLearningStep());
-		courseInfo.setLearningTimes(Integer.parseInt(vo.getLearningTimes()));
 		courseInfo.setLevel(Integer.parseInt(vo.getLevel()));
 		courseInfo.setModifyTime(DateUtil.formatStringToDate(vo.getModifyTime(), DateUtil.Y_M_D_HMS));
 		courseInfo.setSaleState(Integer.parseInt(vo.getSaleState()));
