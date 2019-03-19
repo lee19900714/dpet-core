@@ -16,49 +16,49 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.dpet.core.interceptor.LoginInterceptor;
 import com.dpet.framework.interceptor.DataInterceptor;
 
+/**
+ * @author lijun
+ */
+@SuppressWarnings("ALL")
 @Configuration
 @EnableWebMvc
 @ComponentScan
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
-		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	}
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
 
-	@Bean
-	public InternalResourceViewResolver internalResourceViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/templates/");
-		resolver.setSuffix(".ftl");
-		return resolver;
-	}
+    @Bean
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/templates/");
+        resolver.setSuffix(".ftl");
+        return resolver;
+    }
 
-	@Bean
-	public MultipartResolver multipartResolver() {
-		CommonsMultipartResolver bean = new CommonsMultipartResolver();
-		bean.setDefaultEncoding("UTF-8");
-		bean.setMaxUploadSize(8388608);
-		return bean;
-	}
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver bean = new CommonsMultipartResolver();
+        bean.setDefaultEncoding("UTF-8");
+        bean.setMaxUploadSize(8388608);
+        return bean;
+    }
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		// 数据初始化拦截器
-		registry.addInterceptor(new DataInterceptor()).addPathPatterns("/**");
-		// 登录拦截器
-		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/auth/credentials")
-				.excludePathPatterns("/mobile/checkVersion")
-				.excludePathPatterns("/recommend/**")
-				.excludePathPatterns("/wechatPay/**")
-				.excludePathPatterns("/yeepay/**")
-				.excludePathPatterns("/repair/**");
-	}
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 数据初始化拦截器
+        registry.addInterceptor(new DataInterceptor()).addPathPatterns("/**");
+        // 登录拦截器
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/web/**").excludePathPatterns("/feedback/**")
+                .excludePathPatterns("/article/**").excludePathPatterns("/course/**");
+    }
 
 }
