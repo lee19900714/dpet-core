@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "login")
-public class LoginController {
+public class LoginWXController {
 
     @Autowired
     private UserInfoService userInfoService;
