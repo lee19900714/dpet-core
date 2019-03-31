@@ -10,16 +10,18 @@ package com.dpet.paycenter.wechat.cfg;
 public class WechatConfig {
 	
 	//公众账号ID
-	public static String appId = "wx3e98278c327dfef2";
+	public static String appId = "wx5ccdb2f9cc6516a4";
 	//商户号
-	public static String mchId = "1492791962";
+	public static String mchId = "1522819581";
 	//交易类型
 	public static String tradeType = "JSAPI";
+	//终端ip
+	public static String spbillCreateIp = "39.96.46.173";
 	//商户支付密钥
 	public static String PAY_KEY = "baochelian2017beijingtuwuyou0312";
 	//微信统一支付接口地址
 	public static String unifiedorderUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 	//微信支付回调支付网关地址
-	public static String notifyUrl = "https://core.91bcl.com/v2/wechatPay/notify";
+	public static String notifyUrl = "http://39.96.46.173/dpet-core/ipet/orderinfo/notify";
 	
 }
