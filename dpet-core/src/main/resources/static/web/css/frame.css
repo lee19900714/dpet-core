@@ -422,6 +422,8 @@ table {
     }
 }
 
+
+
 .table-responsive {
     border: none;
 }
@@ -437,7 +439,7 @@ table {
 }
 
 .table-wrapper .table {
-    font-size: 16px;
+    /*font-size: 16px;*/
     margin: 0;
     border-bottom: 1px solid #c8c8c8;
     border-top: 1px solid #c8c8c8;
@@ -449,11 +451,9 @@ table {
 }
 
 .table-wrapper .table th {
-    background: url("../img/table-th-bg.png");
     border-bottom: none;
     height: 52px;
     vertical-align: middle;
-
 }
 
 .table-wrapper .table th.sort img {
@@ -515,19 +515,19 @@ table {
    
 }
 .table-wrapper .table tr.set td:nth-child(3) p,.table-wrapper .table tr.set td:nth-child(4) p{
- */
-}
+
+}*/
 
 .table-wrapper .table tbody tr.info td {
     background-color: #f7f7f7;
 }
 
 .table-wrapper .table tbody tr:hover td, .table-wrapper .table tbody tr.active td {
-    background-color: #fff1cc;
+    background-color: #5dffd8;
 }
 
 .table-wrapper .table tbody tr.no-hover:hover td {
-    background-color: #fff;
+    background-color: #13fffd;
 }
 
 .table-wrapper .table.minw800 {
@@ -2372,4 +2372,17 @@ color: #C4C4C4;
     background: url(../img/jt-bottom.png) no-repeat;
     background-size: 10px 6px;
     background-position: 95%;
+}
+
+.glyphicon-pencil{
+    color:dodgerblue;
+    font-size: 3px;
+}
+.glyphicon-remove{
+    color:red;
+    font-size: 3px;
+}
+.glyphicon-list-alt{
+    color: #ffc539;
+    font-size: 3px;
 }

@@ -17,12 +17,6 @@
 
 <body>
     <div class="frame-header"><span class="page-reload cur">反馈信息</span></div>
-    <!--操作栏-->
-    <div class="operates clearfix" style="overflow: auto;white-space: nowrap; font-size: 0;">
-        <div class="right-btns" style="font-size: 0">
-            <button class="btn delete pramary">删除</button>
-        </div>
-    </div>
     <!--表格-->
     <div class="table-wrapper pl27">
         <table class="table text-center">
@@ -42,7 +36,7 @@
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建时间">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>
-                    <th class="no-nowrap sort cur" style="width: 4%;">创建人id
+                    <th class="no-nowrap sort cur" style="width: 4%;">创建人
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建人">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>

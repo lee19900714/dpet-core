@@ -26,12 +26,9 @@
         <div class="pull-left left-inp defualt">
             <button class="btn delete pramary" type="button" data-toggle="modal" data-target="#myModal">增加</button>
         </div>
-        <div class="right-btns" style="font-size: 0">
-            <button class="btn delete pramary">删除</button>
-        </div>
     </div>
     <!--表格-->
-    <div class="table-wrapper pl27" style="min-width: 2200px">
+    <div class="table-wrapper pl27">
         <table class="table text-center">
             <thead>
                 <tr>
@@ -57,7 +54,7 @@
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建人">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>
-                    <th class="no-nowrap sort cur" style="width: 4%;">课程平均时长(分钟)
+                    <th class="no-nowrap sort cur" style="width: 4%;">时长(分钟)
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建人">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>
@@ -65,7 +62,8 @@
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建人">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>
-                    <th class="no-nowrap sort cur" style="width: 4%;">课程费用(元)
+                    <th class="no-nowrap sort cur" style="width: 4%;">价格
+                        (元)
                         <img class="bottom" src="../static/web/img/jt-bottom.png" alt="创建人">
                         <img class="top" style="display: none" src="../static/web/img/jt-right-co.png" alt="">
                     </th>
@@ -169,11 +167,15 @@
             <div class="tab-margin clearfix " style="width: 400px; position: absolute; left: 50%; margin-left: -120px;"">
                 <div class="fl tb3" style="width: 225px;float: left;">
                     <div class="page-wrapper text-left">
-                        <button class="btn-s"><img src="../static/web/img/left-icon.png" alt=""></button>
-                        <a href="#" class="active">1</a>
-                        <a href="#" class="">2</a>
-                        <a href="#" class="">3</a>
-                        <button class="btn-s"><img src="../static/web/img/right-icon.png" alt=""></button>
+                        <button class="btn-s"><img src="../static/web/img/left-icon.png" alt="上一页"></button>
+                        <#list 1..(page?eval) as t>
+                            <#if t gt 5>
+                                <a href="/course/courselist" class="">...</a>
+                            <#else>
+                                <a href="/course/courselist" class="active">${t}</a>
+                            </#if>
+                        </#list>
+                        <button class="btn-s"><img src="../static/web/img/right-icon.png" alt="下一页"></button>
                     </div>
                 </div>
             </div>

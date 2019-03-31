@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>点菜宝贝，后台管理系统</title>
+    <title>宠到后台管理系统</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="stylesheet" href="../static/web/bootstrap/css/bootstrap.min.css">
