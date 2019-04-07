@@ -30,7 +30,7 @@
       last_active_time, create_time)
     values (#{id,jdbcType=CHAR}, #{userType,jdbcType=INTEGER}, #{userImageUrl,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
-      #{lastActiveTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.dpet.model.UserInfo">
     insert into user_info
