@@ -68,9 +68,6 @@ public class MyBaseController {
 		return ActionUtil.getUser().getProvider_key();
 	}
 
-	protected String getMyselfRole() {
-		return ActionUtil.getUser().getRole_key();
-	}
 
 	/**
 	 * 从Request对象中获得客户端IP，处理了HTTP代理服务器和Nginx的反向代理截取了ip
