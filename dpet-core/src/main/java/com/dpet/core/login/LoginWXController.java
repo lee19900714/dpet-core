@@ -59,6 +59,9 @@ public class LoginWXController {
             Date end = DateUtil.addDay(date, 7);
             jedisPoolCacheUtils.setex(userInfo.getId(), (int) ((end.getTime() - date.getTime()) / 1000), openId + "," + sessionKey);
         }
+        Date date = new Date();
+        Date end = DateUtil.addDay(date, 7);
+        jedisPoolCacheUtils.setex("asd",(int) ((end.getTime() - date.getTime()) / 1000),"asdasdsad");
         return resultMap;
     }
 

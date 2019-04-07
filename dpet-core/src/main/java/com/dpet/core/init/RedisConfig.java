@@ -73,7 +73,7 @@ public class RedisConfig {
     @Bean
     public JedisPool jedisPool() {
         logger.info("宠到core平台JedisPool Bean初始化");
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig(),host,port,timeout,password);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig(), host, port, timeout);
         return jedisPool;
     }
 }
