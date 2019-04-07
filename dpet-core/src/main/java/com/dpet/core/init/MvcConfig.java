@@ -58,7 +58,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new DataInterceptor()).addPathPatterns("/**");
         // 登录拦截器
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/web/**").excludePathPatterns("/feedback/**")
-                .excludePathPatterns("/article/**").excludePathPatterns("/course/**");
+                .excludePathPatterns("/article/**").excludePathPatterns("/course/**").excludePathPatterns("/login/**");
     }
 
 }

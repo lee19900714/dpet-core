@@ -137,7 +137,7 @@ public class OrderController extends MyBaseController {
         }
 
         // 防止重复支付
-        if (order.getOrderState() != OrderStatus.PAYED) {
+        if (order.getOrderState() != OrderStatus.PENDING_PAY) {
             return ResponseUtils.sendFailure("不符合的订单状态：" + order.getOrderState());
         }
 
@@ -248,7 +248,7 @@ public class OrderController extends MyBaseController {
                                 "Wechat result_code is SUCCESS, but the order is not exist|orderId" + orderId);
                     } else {
                         // 防止重复处理
-                        if (order.getOrderState() != OrderStatus.PAYED) {
+                        if (order.getOrderState() != OrderStatus.PENDING_PAY) {
                             return;
                         }
                         // 支付成功业务处理部分

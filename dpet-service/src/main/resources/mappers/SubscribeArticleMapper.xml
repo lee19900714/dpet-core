@@ -100,4 +100,13 @@
         where 1=1
         and user_id = #{userId,jdbcType=CHAR}
     </select>
+    <select id="selectByArticleId" parameterType="java.util.Map"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from subscribe_article
+        where 1=1
+        and article_id = #{articleId,jdbcType=CHAR}
+        and user_id = #{userId,jdbcType=CHAR}
+    </select>
 </mapper>

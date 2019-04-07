@@ -33,7 +33,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo selectByPrimaryKey(String id) {
-        return (UserInfo) userInfoMapper.selectByPrimaryKey(id);
+        return userInfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
