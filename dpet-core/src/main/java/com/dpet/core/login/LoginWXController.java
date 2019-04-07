@@ -8,6 +8,7 @@ import com.dpet.core.util.JedisPoolCacheUtils;
 import com.dpet.model.UserInfo;
 import com.dpet.paycenter.yeepay.utils.HttpUtil;
 import com.dpet.service.inter.UserInfoService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,14 +49,16 @@ public class LoginWXController {
         JSONObject jsonObject = JSONObject.parseObject(jsonData);
         String openId = jsonObject.getString("openid");
         String sessionKey = jsonObject.getString("session_key");
-        UserInfo userInfo = userInfoService.selectByOpenId(openId);
-        if (userInfo == null) {
-            userInfo = this.creatUser(openId);
-            userInfoService.insert(userInfo);
+        if (StringUtils.isNotBlank(openId)) {
+            UserInfo userInfo = userInfoService.selectByOpenId(openId);
+            if (userInfo == null) {
+                userInfo = this.creatUser(openId);
+                userInfoService.insert(userInfo);
+            }
+            Date date = new Date();
+            Date end = DateUtil.addDay(date, 7);
+            jedisPoolCacheUtils.setex(userInfo.getId(), (int) ((end.getTime() - date.getTime()) / 1000), openId + "," + sessionKey);
         }
-        Date date = new Date();
-        Date end = DateUtil.addDay(date, 7);
-        jedisPoolCacheUtils.setex(userInfo.getId(), (int) ((end.getTime() - date.getTime()) / 1000), openId + "," + sessionKey);
         return resultMap;
     }
 
