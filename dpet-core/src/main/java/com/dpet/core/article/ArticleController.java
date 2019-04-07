@@ -66,7 +66,7 @@ public class ArticleController extends MyBaseController {
         resultMap.put("page", articleInfos.getPages());
         resultMap.put("total", articleInfos.getTotal());
         List<ArticleInfoVO> articleInfoVOS = articleInfoConvertor.convertVOList(articleInfos.getResult());
-        if(!CollectionUtils.isEmpty(articleInfoVOS)) {
+        if (!CollectionUtils.isEmpty(articleInfoVOS)) {
             articleInfoVOS.forEach(s -> {
                 String createId = s.getCreateId();
                 if (StringUtils.isBlank(createId)) {
@@ -75,7 +75,7 @@ public class ArticleController extends MyBaseController {
                 UserInfo userInfo = userInfoService.selectByPrimaryKey(createId);
                 if (userInfo == null) {
                     s.setCreateName(null);
-                }else{
+                } else {
                     s.setCreateName(userInfo.getUserName());
                 }
                 SubscribeArticle subscribeArticle = subscribeArticleService.selectByArticleId(s.getId(), getMyselfId());
@@ -167,13 +167,14 @@ public class ArticleController extends MyBaseController {
             articleInfoVOS.forEach(s -> {
                 String createId = s.getCreateId();
                 if (StringUtils.isBlank(createId)) {
-                    return;
+                    s.setCreateName(null);
                 }
                 UserInfo userInfo = userInfoService.selectByPrimaryKey(createId);
                 if (userInfo == null) {
-                    return;
+                    s.setCreateName(null);
+                } else {
+                    s.setCreateName(userInfo.getUserName());
                 }
-                s.setCreateName(userInfo.getUserName());
                 SubscribeArticle subscribeArticle = subscribeArticleService.selectByArticleId(s.getId(), getMyselfId());
                 if (subscribeArticle != null) {
                     s.setCollect(true);
