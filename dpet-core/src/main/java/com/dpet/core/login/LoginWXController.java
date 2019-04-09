@@ -65,7 +65,8 @@ public class LoginWXController {
 
             JWTUser jwtUser = setActionUser(userInfo);
             //设置token
-            response.addHeader("x-auth-token", JWTUtil.sign(JSONObject.toJSONString(jwtUser), DateUtil.formatDateToString(end, DateUtil.ymd_HMS)));
+            String token = JWTUtil.sign(net.sf.json.JSONObject.fromObject(jwtUser).toString(), DateUtil.formatDateToString(end, DateUtil.Y_M_D_HMS));
+            resultMap.put("x-auth-token", token);
         }
         return resultMap;
     }
