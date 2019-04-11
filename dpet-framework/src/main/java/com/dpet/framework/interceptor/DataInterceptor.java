@@ -90,9 +90,9 @@ public class DataInterceptor extends BaseController implements HandlerIntercepto
             String userInfo = JWTUtil.unsign(token);
             JSONObject userInfoJson = JSONObject.fromObject(userInfo);
             JWTUser user = new JWTUser();
-            user.setUser_id(userInfoJson.getString("id"));
-            if (userInfoJson.has("providerKey")) {
-                user.setProvider_key(userInfoJson.getString("providerKey"));
+            user.setUser_id(userInfoJson.getString("user_id"));
+            if (userInfoJson.has("provider_key")) {
+                user.setProvider_key(userInfoJson.getString("provider_key"));
                 logger.info("**********************providerKey:" + user.getProvider_key());
             }
             ActionUtil.setUser(user);
