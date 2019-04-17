@@ -5,5 +5,5 @@ import com.github.pagehelper.Page;
 
 
 public interface OrderInfoService extends MetaService<OrderInfo> {
-    Page<OrderInfo> selectByUserId(String userId, int pageNum, int pageSize);
+    Page<OrderInfo> selectByUserId(String userId, String orderStatus, int pageNum, int pageSize);
 }

@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -47,8 +48,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     }
 
     @Override
-    public Page<OrderInfo> selectByUserId(String userId, int pageNum, int pageSize) {
+    public Page<OrderInfo> selectByUserId(String userId, String orderStatus, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return orderInfoMapper.selectByUserId(userId);
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("orderState", Integer.parseInt(orderStatus));
+        return orderInfoMapper.selectByUserId(params);
     }
 }

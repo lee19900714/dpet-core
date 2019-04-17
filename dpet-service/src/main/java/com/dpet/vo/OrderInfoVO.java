@@ -1,6 +1,8 @@
 package com.dpet.vo;
 
 
+import java.util.List;
+
 public class OrderInfoVO extends OrderInfoKeyVO {
     private String orderAmount;
 
@@ -13,6 +15,8 @@ public class OrderInfoVO extends OrderInfoKeyVO {
     private String modifyTime;
 
     private String modifierId;
+
+    private List<CourseInfoVO> courseInfoVOS;
 
 	public String getOrderAmount() {
 		return orderAmount;
@@ -62,5 +66,11 @@ public class OrderInfoVO extends OrderInfoKeyVO {
 		this.modifierId = modifierId;
 	}
 
-    
+	public List<CourseInfoVO> getCourseInfoVOS() {
+		return courseInfoVOS;
+	}
+
+	public void setCourseInfoVOS(List<CourseInfoVO> courseInfoVOS) {
+		this.courseInfoVOS = courseInfoVOS;
+	}
 }

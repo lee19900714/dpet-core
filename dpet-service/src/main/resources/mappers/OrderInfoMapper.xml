@@ -175,11 +175,17 @@
 		#{buyCourseId,jdbcType=CHAR}
 		and user_id = #{userId,jdbcType=CHAR}
 	</update>
-    <select id="selectByUserId" parameterType="java.lang.String"
+    <select id="selectByUserId" parameterType="java.util.Map"
             resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from order_info
         where user_id = #{userId,jdbcType=CHAR}
+        <if test="orderStatus==1">
+            and (order_state = 1 or order_state = 2 or order_state = 6)
+        </if>
+        <if test="orderStatus==3">
+            and (order_state = 3 or order_state = 4 or order_state = 5)
+        </if>
     </select>
 </mapper>
