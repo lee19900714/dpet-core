@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -190,7 +191,9 @@ public class OrderController extends MyBaseController {
         paramMap.put("body", body);
         // 商户支付订单号
         paramMap.put("out_trade_no", order.getId());
-        paramMap.put("total_fee", order.getOrderAmount().toString());
+
+        String total_fee = new BigDecimal(order.getOrderAmount()).multiply(new BigDecimal("100")).intValue() + "";
+        paramMap.put("total_fee", total_fee);
         // 终端IP
         paramMap.put("spbill_create_ip", WechatConfig.spbillCreateIp);
         // 交易起始时间
