@@ -1,11 +1,11 @@
 package com.dpet.core.order;
 
-import com.dpet.commons.Constants;
 import com.dpet.commons.OrderStatus;
 import com.dpet.commons.PayType;
 import com.dpet.commons.utils.DateUtil;
 import com.dpet.commons.utils.StringUtil;
 import com.dpet.commons.utils.UUIDUtil;
+import com.dpet.convertors.CourseInfoConvertor;
 import com.dpet.convertors.OrderInfoConvert;
 import com.dpet.core.MyBaseController;
 import com.dpet.framework.ResponseUtils;
@@ -21,7 +21,11 @@ import com.dpet.paycenter.wechat.vo.JSPayParam;
 import com.dpet.service.inter.CourseInfoService;
 import com.dpet.service.inter.OrderInfoService;
 import com.dpet.service.inter.UserInfoService;
+import com.dpet.vo.CourseInfoVO;
+import com.dpet.vo.OrderInfoVO;
 import com.github.pagehelper.Page;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +58,9 @@ public class OrderController extends MyBaseController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private CourseInfoConvertor courseInfoConvertor;
 
     /**
      * 订单下单接口
@@ -113,8 +120,30 @@ public class OrderController extends MyBaseController {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         int pageNums = request.getParameter("pageNum") == null ? pageNum : Integer.parseInt(request.getParameter("pageNum"));
         int pageSizes = request.getParameter("pageSize") == null ? pageSize : Integer.parseInt(request.getParameter("pageSize"));
-        Page<OrderInfo> page = orderInfoService.selectByUserId(getMyselfId(), pageNums, pageSizes);
-        resultMap.put("orders", orderInfoConvert.convertVOList(page.getResult()));
+        String orderStatus = request.getParameter("orderStatus");
+        Page<OrderInfo> page = orderInfoService.selectByUserId(getMyselfId(), orderStatus, pageNums, pageSizes);
+        List<OrderInfoVO> orderInfoVOS = orderInfoConvert.convertVOList(page.getResult());
+        orderInfoVOS.forEach(s -> {
+            //支付类型转换
+            s.setPayType(PayType.getValue(Integer.parseInt(s.getPayType())));
+            //订单状态
+            s.setOrderState(OrderStatus.getValue(Integer.parseInt(s.getOrderState())));
+            String buyCourseId = s.getBuyCourseId();
+            if (StringUtils.isBlank(buyCourseId)) {
+                return;
+            }
+            List<String> courseIds = Arrays.asList(buyCourseId.split(","));
+            if (CollectionUtils.isEmpty(courseIds)) {
+                return;
+            }
+            List<CourseInfoVO> courseInfoVOList = new ArrayList<>();
+            courseIds.forEach(c -> {
+                CourseInfo courseInfo = courseInfoService.selectByPrimaryKey(c);
+                courseInfoVOList.add(courseInfoConvertor.convertVO(courseInfo));
+            });
+            s.setCourseInfoVOS(courseInfoVOList);
+        });
+        resultMap.put("orders", orderInfoVOS);
         resultMap.put("pageNum", page.getPageNum());
         resultMap.put("pageSize", page.getPageSize());
         resultMap.put("page", page.getPages());
