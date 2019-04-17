@@ -18,7 +18,7 @@ public class WechatConfig {
 	//终端ip
 	public static String spbillCreateIp = "39.96.46.173";
 	//商户支付密钥
-	public static String PAY_KEY = "baochelian2017beijingtuwuyou0312";
+	public static String PAY_KEY = "beijingchongdaokejigongsi2018309";
 	//微信统一支付接口地址
 	public static String unifiedorderUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 	//微信支付回调支付网关地址
