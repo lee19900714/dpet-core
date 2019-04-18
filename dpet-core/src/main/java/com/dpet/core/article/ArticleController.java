@@ -114,8 +114,11 @@ public class ArticleController extends MyBaseController {
         String articleId = request.getParameter("articleId");
         String operateType = request.getParameter("operateType");
         if (SubscribeArticleType.SUBSCRIBE_COMMIT.equals(operateType)) {
-            SubscribeArticle sa = this.getsubscribeArticle(articleId, operateType);
-            subscribeArticleService.insert(sa);
+            SubscribeArticle subscribeArticle = subscribeArticleService.selectByArticleId(articleId, this.getMyselfId());
+            if (subscribeArticle == null) {
+                SubscribeArticle sa = this.getsubscribeArticle(articleId, operateType);
+                subscribeArticleService.insert(sa);
+            }
         } else {
             Map<String, String> ids = new HashMap<>(1);
             ids.put("id", articleId);
