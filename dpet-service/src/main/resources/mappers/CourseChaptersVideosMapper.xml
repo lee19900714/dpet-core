@@ -209,5 +209,6 @@
 		from course_chapters_videos
 		where 1=1
 		and course_chapters_id = #{courseChaptersId,jdbcType=CHAR}
+		order by video_order asc
 	</select>
 </mapper>
